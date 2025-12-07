@@ -46,143 +46,82 @@
             opacity: 0.95;
         }
         
-        /* 가치 제안 섹션 */
-        .value-prop {
-            background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%);
-            border: 3px solid #ffc107;
-            padding: 35px;
-            margin: 30px;
-            border-radius: 20px;
-            text-align: center;
+        /* 설정 섹션 */
+        .setup-section {
+            padding: 30px;
+            background: #f8f9ff;
+            border-bottom: 2px solid #e0e0e0;
         }
         
-        .wto-badge {
-            display: inline-block;
-            background: #2196F3;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 25px;
-            font-weight: 600;
-            margin-bottom: 20px;
+        .setup-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .config-row {
+            margin-bottom: 15px;
+        }
+        
+        .config-row label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
             font-size: 0.9em;
         }
         
-        .value-prop h2 {
-            font-size: 2em;
-            color: #856404;
-            line-height: 1.4;
-            margin-bottom: 10px;
-        }
-        
-        .sub-text {
-            font-size: 0.6em;
-            color: #666;
-            font-weight: 400;
-        }
-        
-        .but-text {
-            font-size: 1.5em;
-            color: #667eea;
-            margin: 20px 0;
-            font-weight: 600;
-        }
-        
-        .budget-highlight {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin: 20px auto;
-            max-width: 400px;
-        }
-        
-        .big-number {
-            font-size: 4em;
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .budget-detail {
-            font-size: 1.1em;
-            color: #555;
-            margin: 5px 0;
-        }
-        
-        .problem-text {
-            font-size: 1.5em;
-            color: #dc3545;
-            margin: 25px 0;
-            font-weight: 600;
-        }
-        
-        .solution-highlight {
-            font-size: 1.8em;
-            color: #667eea;
-            font-weight: 700;
-            margin-top: 20px;
-        }
-        
-        /* 입력 섹션 */
-        .input-section {
-            padding: 40px;
-            background: #f8f9ff;
-        }
-        
-        .section-title {
-            font-size: 1.5em;
-            color: #333;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-        
-        /* API 키 입력 */
-        .api-key-section {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            border: 2px solid #e0e0e0;
-        }
-        
-        .api-key-input-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .api-key-input-group input {
-            flex: 1;
+        .config-row input {
+            width: 100%;
             padding: 12px;
             border: 2px solid #e0e0e0;
             border-radius: 8px;
             font-size: 1em;
         }
         
-        .api-key-input-group button {
-            padding: 12px 30px;
+        .config-row input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .save-btn {
             background: #667eea;
             color: white;
             border: none;
+            padding: 12px 30px;
             border-radius: 8px;
             cursor: pointer;
+            font-size: 1em;
             font-weight: 600;
+            transition: all 0.3s;
         }
         
-        .api-key-status {
+        .save-btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+        
+        .status {
             margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
             font-size: 0.9em;
         }
         
-        .api-help-text {
-            font-size: 0.85em;
-            color: #666;
-            margin-top: 10px;
+        /* 내용 섹션 */
+        .content {
+            padding: 30px;
         }
         
-        .api-help-text a {
-            color: #667eea;
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
         }
         
         /* 탭 */
@@ -190,24 +129,24 @@
             display: flex;
             gap: 10px;
             margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
         }
         
         .tab {
-            flex: 1;
-            padding: 15px;
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
             cursor: pointer;
-            text-align: center;
-            font-weight: 600;
+            font-size: 1em;
+            color: #666;
             transition: all 0.3s;
         }
         
         .tab.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-color: #667eea;
+            color: #667eea;
+            border-bottom-color: #667eea;
+            font-weight: 600;
         }
         
         .tab-content {
@@ -218,19 +157,18 @@
             display: block;
         }
         
-        /* 샘플 선택 */
+        /* 샘플 그리드 */
         .sample-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
         }
         
         .sample-card {
-            background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8ebff 100%);
             border: 2px solid #e0e0e0;
-            border-radius: 15px;
-            padding: 25px;
+            border-radius: 12px;
+            padding: 20px;
             cursor: pointer;
             transition: all 0.3s;
             position: relative;
@@ -238,124 +176,116 @@
         
         .sample-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
             border-color: #667eea;
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.2);
         }
         
         .sample-card.selected {
             border-color: #667eea;
             border-width: 3px;
-            background: linear-gradient(135deg, #e8ebff 0%, #fff 100%);
+            background: linear-gradient(135deg, #e8ebff 0%, #d4d9ff 100%);
         }
         
-        .sample-number {
+        .sample-card.selected::after {
+            content: '✓';
             position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            top: 10px;
+            right: 10px;
+            background: #667eea;
             color: white;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 1.1em;
         }
         
-        .sample-card h4 {
+        .sample-number {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #667eea;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        .sample-card.selected .sample-number {
+            display: none;
+        }
+        
+        .sample-title {
+            font-size: 1.2em;
+            font-weight: 600;
             color: #333;
-            margin-bottom: 12px;
-            font-size: 1.15em;
-            padding-right: 45px;
+            margin-bottom: 10px;
+            padding-right: 35px;
         }
         
         .sample-tags {
             display: flex;
-            gap: 8px;
-            margin-bottom: 12px;
+            gap: 5px;
             flex-wrap: wrap;
+            margin-bottom: 10px;
         }
         
         .sample-tag {
             background: #667eea;
             color: white;
-            padding: 4px 10px;
+            padding: 3px 10px;
             border-radius: 12px;
             font-size: 0.75em;
-            font-weight: 600;
         }
         
         .sample-desc {
             color: #666;
             font-size: 0.9em;
-            line-height: 1.5;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         
         .sample-budget {
             color: #667eea;
             font-weight: 600;
-            font-size: 0.9em;
-        }
-        
-        .sample-card.selected::before {
-            content: '✓';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            width: 30px;
-            height: 30px;
-            background: #4caf50;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2em;
-            font-weight: bold;
-            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+            font-size: 0.95em;
         }
         
         /* 파일 업로드 */
-        .upload-area {
-            background: white;
-            border: 3px dashed #667eea;
-            border-radius: 15px;
-            padding: 40px;
+        .file-upload {
+            border: 2px dashed #667eea;
+            border-radius: 12px;
+            padding: 30px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
         }
         
-        .upload-area:hover {
+        .file-upload:hover {
             background: #f8f9ff;
-            border-color: #764ba2;
+            border-color: #5568d3;
         }
         
-        .upload-icon {
-            font-size: 3em;
-            margin-bottom: 10px;
-        }
-        
-        input[type="file"] {
+        .file-upload input {
             display: none;
         }
         
         /* 폼 입력 */
         .form-group {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         
         .form-group label {
             display: block;
-            font-weight: 600;
-            color: #333;
             margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
         }
         
         .form-group input,
@@ -373,35 +303,47 @@
             resize: vertical;
         }
         
-        /* 버튼 */
-        .btn-primary {
-            width: 100%;
-            padding: 18px;
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        /* 분석 버튼 */
+        .analyze-btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            border-radius: 10px;
-            font-size: 1.2em;
+            padding: 18px 40px;
+            border-radius: 30px;
+            font-size: 1.1em;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s;
-            margin-top: 20px;
+            width: 100%;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
         }
         
-        .btn-primary:hover:not(:disabled) {
+        .analyze-btn:hover:not(:disabled) {
             transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
         }
         
-        .btn-primary:disabled {
+        .analyze-btn:disabled {
             background: #ccc;
             cursor: not-allowed;
+            box-shadow: none;
         }
         
         /* 로딩 */
         .loading {
+            display: none;
             text-align: center;
-            padding: 60px 40px;
+            padding: 40px;
+        }
+        
+        .loading.active {
+            display: block;
         }
         
         .spinner {
@@ -421,144 +363,99 @@
         
         /* 결과 */
         .results {
-            padding: 40px;
-            background: #f8f9ff;
+            display: none;
+            margin-top: 30px;
+        }
+        
+        .results.active {
+            display: block;
         }
         
         .result-card {
-            background: white;
-            border-left: 5px solid #667eea;
-            padding: 25px;
+            background: #f8f9ff;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
             margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
-        .result-card h3 {
+        .result-card h4 {
             color: #667eea;
             margin-bottom: 15px;
             font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
-        .result-card .content {
-            line-height: 1.8;
+        .result-text {
             color: #333;
+            line-height: 1.8;
+            white-space: pre-wrap;
         }
         
-        /* 정책 카드 */
         .program-card {
             background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
-            position: relative;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
         }
         
-        .program-card h4 {
-            color: #333;
-            font-size: 1.2em;
+        .program-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
             margin-bottom: 15px;
-            padding-right: 80px;
+        }
+        
+        .program-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #333;
+            flex: 1;
         }
         
         .match-score {
-            position: absolute;
-            top: 25px;
-            right: 25px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 8px 15px;
+            padding: 8px 16px;
             border-radius: 20px;
-            font-weight: bold;
+            font-weight: 600;
             font-size: 1.1em;
         }
         
         .program-meta {
             display: flex;
             gap: 10px;
-            margin: 15px 0;
             flex-wrap: wrap;
+            margin-bottom: 15px;
         }
         
         .meta-tag {
             background: #e8ebff;
-            padding: 6px 12px;
-            border-radius: 5px;
-            font-size: 0.85em;
             color: #667eea;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
         }
         
         .program-reason {
-            margin-top: 20px;
+            color: #666;
+            line-height: 1.8;
             padding: 15px;
-            background: #f0f4ff;
+            background: #f8f9ff;
             border-radius: 8px;
-            line-height: 1.6;
         }
         
-        .program-reason strong {
-            color: #667eea;
-        }
-        
-        /* 에러 */
-        .error {
-            background: #ffe8e8;
-            color: #d32f2f;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-        
-        /* 모바일 반응형 */
+        /* 반응형 */
         @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            
-            .container {
-                border-radius: 15px;
-            }
-            
             .header h1 {
                 font-size: 1.8em;
             }
             
-            .value-prop {
-                padding: 20px;
-                margin: 20px;
-            }
-            
-            .value-prop h2 {
-                font-size: 1.5em;
-            }
-            
-            .big-number {
-                font-size: 3em;
-            }
-            
-            .input-section,
-            .results {
-                padding: 20px;
-            }
-            
-            .api-key-input-group {
-                flex-direction: column;
-            }
-            
-            .api-key-input-group button {
-                width: 100%;
-            }
-            
-            .match-score {
-                position: static;
-                display: block;
-                margin-top: 10px;
-                width: fit-content;
-            }
-            
-            .program-card h4 {
-                padding-right: 0;
+            .sample-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -567,765 +464,327 @@
     <div class="container">
         <!-- 헤더 -->
         <div class="header">
-            <h1>🎯 N2B Framework</h1>
-            <p class="subtitle">정부 R&D 정책자금 AI 매칭</p>
+            <h1>🎯 N2B</h1>
+            <p class="subtitle">정부 R&D 정책자금 매칭 시스템</p>
         </div>
         
-        <!-- 가치 제안 -->
-        <div class="value-prop">
-            <div class="wto-badge">🌍 WTO 규제</div>
-            <h2>
-                정부가 직접 줄 수 없습니다<br>
-                <span class="sub-text">(국제 무역 협정 - 공정경쟁 원칙)</span>
-            </h2>
-            <div class="but-text">하지만</div>
-            <div class="budget-highlight">
-                <div class="big-number">20조원</div>
-                <div class="budget-detail">연간 R&D 예산</div>
-                <div class="budget-detail">700개 이상 정책</div>
+        <!-- 설정 섹션 -->
+        <div class="setup-section">
+            <h3>⚙️ 설정</h3>
+            
+            <div class="config-row">
+                <label>Google Apps Script 백엔드 URL</label>
+                <input 
+                    type="text" 
+                    id="backendUrl" 
+                    placeholder="https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec"
+                >
             </div>
-            <div class="problem-text">
-                ❌ 정보가 연결되지 않습니다
+            
+            <div class="config-row">
+                <label>Anthropic API 키</label>
+                <input 
+                    type="password" 
+                    id="apiKeyInput" 
+                    placeholder="sk-ant-api03-..."
+                >
             </div>
-            <div class="solution-highlight">
-                ✅ N2B가 투명하게 연결합니다
-            </div>
+            
+            <button class="save-btn" onclick="saveConfig()">💾 설정 저장</button>
+            <div id="configStatus" class="status"></div>
         </div>
         
-        <!-- 입력 섹션 -->
-        <div class="input-section">
-            <h2 class="section-title">🔑 1단계: API 키 설정</h2>
-            <div class="api-key-section">
-                <label><strong>Anthropic API 키</strong></label>
-                <div class="api-key-input-group">
-                    <input 
-                        type="password" 
-                        id="apiKeyInput" 
-                        placeholder="sk-ant-api03-..."
-                    >
-                    <button id="saveApiKeyBtn">저장</button>
+        <!-- 메인 콘텐츠 -->
+        <div class="content">
+            <!-- 입력 섹션 -->
+            <div class="section">
+                <h3>📝 사업계획서 입력</h3>
+                
+                <div class="tabs">
+                    <button class="tab active" data-tab="sample" onclick="switchTab('sample')">🎯 샘플 선택</button>
+                    <button class="tab" data-tab="upload" onclick="switchTab('upload')">📄 파일 업로드</button>
+                    <button class="tab" data-tab="form" onclick="switchTab('form')">✍️ 직접 입력</button>
                 </div>
-                <div id="apiKeyStatus" class="api-key-status"></div>
-                <p class="api-help-text">
-                    💡 브라우저에만 저장되며 외부로 전송되지 않습니다. 
-                    <a href="https://console.anthropic.com/settings/keys" target="_blank">API 키 발급받기</a>
-                </p>
-            </div>
-            
-            <h2 class="section-title">📝 2단계: 사업계획서 입력</h2>
-            <div class="tabs">
-                <div class="tab active" data-tab="sample">🎯 샘플 선택</div>
-                <div class="tab" data-tab="upload">📄 파일 업로드</div>
-                <div class="tab" data-tab="form">✍️ 직접 입력</div>
-            </div>
-            
-            
-            <!-- 샘플 선택 탭 -->
-            <div id="sample-tab" class="tab-content active">
-                <div style="background: white; padding: 25px; border-radius: 15px;">
-                    <h3 style="margin-bottom: 20px; color: #667eea;">💡 샘플 사업계획서를 선택하세요</h3>
-                    <p style="margin-bottom: 20px; color: #666; line-height: 1.6;">
-                        다양한 분야의 실전 수준 사업계획서로 N2B 앱을 바로 체험해보세요!
-                    </p>
-                    
+                
+                <!-- 샘플 선택 탭 -->
+                <div id="sample-tab" class="tab-content active">
                     <div class="sample-grid">
-                        <div class="sample-card" data-sample="1">
+                        <div class="sample-card" data-sample="1" onclick="selectSample(1)">
                             <div class="sample-number">1</div>
-                            <h4>AI 건설 안전관리</h4>
+                            <div class="sample-title">AI 건설 안전관리</div>
                             <div class="sample-tags">
-                                <span class="sample-tag">건설기술</span>
-                                <span class="sample-tag">AI/IoT</span>
-                            </div>
-                            <p class="sample-desc">실시간 위험 감지 및 사고 예방 시스템</p>
-                            <div class="sample-budget">예산: 15억원</div>
-                        </div>
-                        
-                        <div class="sample-card" data-sample="2">
-                            <div class="sample-number">2</div>
-                            <h4>스마트팜 병해충 예측</h4>
-                            <div class="sample-tags">
-                                <span class="sample-tag">농업</span>
-                                <span class="sample-tag">친환경</span>
-                            </div>
-                            <p class="sample-desc">농약 사용 60% 감소 AI 진단 시스템</p>
-                            <div class="sample-budget">예산: 12억원</div>
-                        </div>
-                        
-                        <div class="sample-card" data-sample="3">
-                            <div class="sample-number">3</div>
-                            <h4>폐플라스틱 재활용</h4>
-                            <div class="sample-tags">
-                                <span class="sample-tag">환경</span>
-                                <span class="sample-tag">순환경제</span>
-                            </div>
-                            <p class="sample-desc">AI 자동분류로 고품질 재생원료 생산</p>
-                            <div class="sample-budget">예산: 20억원</div>
-                        </div>
-                        
-                        <div class="sample-card" data-sample="4">
-                            <div class="sample-number">4</div>
-                            <h4>헬스케어 웨어러블</h4>
-                            <div class="sample-tags">
-                                <span class="sample-tag">의료기기</span>
+                                <span class="sample-tag">건설</span>
                                 <span class="sample-tag">AI</span>
                             </div>
-                            <p class="sample-desc">심장 돌연사 예방 실시간 모니터링</p>
-                            <div class="sample-budget">예산: 18억원</div>
+                            <div class="sample-desc">실시간 위험 감지 및 예방적 안전관리</div>
+                            <div class="sample-budget">💰 15억원</div>
                         </div>
                         
-                        <div class="sample-card" data-sample="5">
+                        <div class="sample-card" data-sample="2" onclick="selectSample(2)">
+                            <div class="sample-number">2</div>
+                            <div class="sample-title">스마트팜 병해충 예측</div>
+                            <div class="sample-tags">
+                                <span class="sample-tag">농업</span>
+                                <span class="sample-tag">IoT</span>
+                            </div>
+                            <div class="sample-desc">AI 영상 진단으로 농약 사용 60% 감소</div>
+                            <div class="sample-budget">💰 12억원</div>
+                        </div>
+                        
+                        <div class="sample-card" data-sample="3" onclick="selectSample(3)">
+                            <div class="sample-number">3</div>
+                            <div class="sample-title">폐플라스틱 재활용</div>
+                            <div class="sample-tags">
+                                <span class="sample-tag">환경</span>
+                                <span class="sample-tag">ESG</span>
+                            </div>
+                            <div class="sample-desc">99% 정확도 AI 분류로 Virgin급 재생원료</div>
+                            <div class="sample-budget">💰 20억원</div>
+                        </div>
+                        
+                        <div class="sample-card" data-sample="4" onclick="selectSample(4)">
+                            <div class="sample-number">4</div>
+                            <div class="sample-title">헬스케어 웨어러블</div>
+                            <div class="sample-tags">
+                                <span class="sample-tag">의료</span>
+                                <span class="sample-tag">AI</span>
+                            </div>
+                            <div class="sample-desc">AI 심전도 분석으로 돌연사 예방</div>
+                            <div class="sample-budget">💰 18억원</div>
+                        </div>
+                        
+                        <div class="sample-card" data-sample="5" onclick="selectSample(5)">
                             <div class="sample-number">5</div>
-                            <h4>중소기업 스마트팩토리</h4>
+                            <div class="sample-title">스마트팩토리 솔루션</div>
                             <div class="sample-tags">
                                 <span class="sample-tag">제조</span>
                                 <span class="sample-tag">디지털</span>
                             </div>
-                            <p class="sample-desc">노코드 기반 저비용 맞춤형 솔루션</p>
-                            <div class="sample-budget">예산: 15억원</div>
+                            <div class="sample-desc">중소기업 맞춤형 저비용 스마트팩토리</div>
+                            <div class="sample-budget">💰 15억원</div>
                         </div>
+                    </div>
+                </div>
+                
+                <!-- 파일 업로드 탭 -->
+                <div id="upload-tab" class="tab-content">
+                    <div class="file-upload" onclick="document.getElementById('fileInput').click()">
+                        <input type="file" id="fileInput" accept=".txt,.docx,.pdf" onchange="handleFileUpload(event)">
+                        <p style="font-size: 3em; margin-bottom: 10px;">📄</p>
+                        <p style="color: #667eea; font-weight: 600; margin-bottom: 5px;">파일 선택 또는 드래그 앤 드롭</p>
+                        <p style="color: #999; font-size: 0.9em;">지원 형식: TXT, DOCX, PDF</p>
+                    </div>
+                    <div id="fileName" style="margin-top: 15px; color: #667eea; font-weight: 600;"></div>
+                </div>
+                
+                <!-- 직접 입력 탭 -->
+                <div id="form-tab" class="tab-content">
+                    <div class="form-group">
+                        <label>사업명</label>
+                        <input type="text" id="projectName" placeholder="예: AI 기반 건설현장 안전관리 시스템">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>N (NOT) - 현재의 문제점</label>
+                        <textarea id="problemN" placeholder="해결하고자 하는 문제, 현재의 한계점을 기술하세요"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>B (BUT) - 제안하는 솔루션</label>
+                        <textarea id="solutionB" placeholder="어떤 혁신적인 해결책을 제안하는지 기술하세요"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>C (BECAUSE) - 근거 및 기대효과</label>
+                        <textarea id="evidenceC" placeholder="왜 이 솔루션이 효과적인지, 어떤 성과를 기대하는지 기술하세요"></textarea>
                     </div>
                 </div>
             </div>
             
-            <!-- 파일 업로드 탭 -->
-            <div id="upload-tab" class="tab-content">
-                <div class="upload-area" id="uploadArea">
-                    <div class="upload-icon">📄</div>
-                    <h3>사업계획서를 업로드하세요</h3>
-                    <p>클릭하거나 파일을 드래그하세요 (PDF, DOCX, TXT)</p>
-                    <input type="file" id="fileInput" accept=".pdf,.docx,.txt">
-                </div>
-            </div>
-            
-            <!-- 직접 입력 탭 -->
-            <div id="form-tab" class="tab-content">
-                <div class="form-group">
-                    <label>사업명</label>
-                    <input type="text" id="projectName" placeholder="예: AI 기반 스마트 건설 안전 관리 시스템">
-                </div>
-                
-                <div class="form-group">
-                    <label>현재 문제점 (N - NOT)</label>
-                    <textarea id="problemN" placeholder="현재 건설 현장에서 겪고 있는 문제점을 설명해주세요..."></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label>제안 솔루션 (B - BUT)</label>
-                    <textarea id="solutionB" placeholder="제안하는 해결책과 혁신 내용을 설명해주세요..."></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label>근거 및 기대효과 (C - BECAUSE)</label>
-                    <textarea id="evidenceC" placeholder="왜 이 솔루션이 효과적인지 근거를 제시해주세요..."></textarea>
-                </div>
-            </div>
-            
-            <button id="analyzeBtn" class="btn-primary" disabled>
+            <!-- 분석 버튼 -->
+            <button id="analyzeBtn" class="analyze-btn" disabled onclick="startAnalysis()">
                 🚀 N2B 분석 및 정책 매칭 시작
             </button>
+            
+            <!-- 로딩 -->
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>AI가 사업계획서를 분석하고 있습니다...</p>
+            </div>
+            
+            <!-- 결과 -->
+            <div id="results" class="results">
+                <h3 style="color: #667eea; margin-bottom: 20px;">📊 분석 결과</h3>
+                
+                <div class="result-card">
+                    <h4>N (NOT) - 현재의 문제점</h4>
+                    <div id="resultN" class="result-text"></div>
+                </div>
+                
+                <div class="result-card">
+                    <h4>B (BUT) - 제안 솔루션</h4>
+                    <div id="resultB" class="result-text"></div>
+                </div>
+                
+                <div class="result-card">
+                    <h4>C (BECAUSE) - 근거 및 기대효과</h4>
+                    <div id="resultC" class="result-text"></div>
+                </div>
+                
+                <h3 style="color: #667eea; margin: 30px 0 20px;">🎯 추천 정부지원사업 Top 3</h3>
+                <div id="programResults"></div>
+            </div>
         </div>
-        
-        <!-- 결과 섹션 -->
-        <div id="results" class="results" style="display: none;"></div>
     </div>
 
     <script>
-        // 정부지원사업 데이터 (20개)
-        const govPrograms = [
-            {
-                "id": 1,
-                "name": "2025년 3차 중소벤처기업부 혁신제품 추가등록",
-                "category": "기타",
-                "agency": "중소벤처기업부",
-                "target": "중소기업",
-                "period": "2025-11-06 ~ 2025-12-16",
-                "support_amount": "혁신제품 인증",
-                "keywords": ["혁신제품", "인증", "규격추가"]
-            },
-            {
-                "id": 2,
-                "name": "2025년 우수 물류신기술등 지정 시행",
-                "category": "기타",
-                "agency": "국토교통부",
-                "target": "물류기업",
-                "period": "2025-08-11 ~ 2025-12-31",
-                "support_amount": "신기술 인증",
-                "keywords": ["물류", "신기술", "인증"]
-            },
-            {
-                "id": 3,
-                "name": "2025년 한국산업은행 온렌딩 대출 제도",
-                "category": "금융",
-                "agency": "한국산업은행",
-                "target": "중소기업",
-                "period": "2025-03-06 ~ 2026-03-05",
-                "support_amount": "융자",
-                "keywords": ["대출", "융자", "산업은행"]
-            },
-            {
-                "id": 4,
-                "name": "2025년 핀테크 보안지원 사업",
-                "category": "기술",
-                "agency": "금융위원회",
-                "target": "핀테크기업",
-                "period": "2025-02-24 ~ 2025-12-31",
-                "support_amount": "보안컨설팅",
-                "keywords": ["핀테크", "보안", "기술지원"]
-            },
-            {
-                "id": 5,
-                "name": "2025년 근로자 휴가지원사업",
-                "category": "인력",
-                "agency": "문화체육관광부",
-                "target": "중소기업",
-                "period": "2025-01-24 ~ 2025-12-31",
-                "support_amount": "휴가비 지원",
-                "keywords": ["근로자", "휴가", "복지"]
-            },
-            {
-                "id": 6,
-                "name": "2025년 IP투자연계 지식재산평가 지원사업",
-                "category": "기술",
-                "agency": "특허청",
-                "target": "IP보유기업",
-                "period": "2025-03-07 ~ 2025-12-31",
-                "support_amount": "평가비용",
-                "keywords": ["IP", "투자", "평가"]
-            },
-            {
-                "id": 7,
-                "name": "2025년 IP보증연계 지식재산평가지원사업",
-                "category": "금융",
-                "agency": "특허청",
-                "target": "IP보유기업",
-                "period": "2025-03-06 ~ 2025-12-31",
-                "support_amount": "보증료",
-                "keywords": ["IP", "보증", "금융"]
-            },
-            {
-                "id": 8,
-                "name": "2025년 IP담보대출연계 지식재산평가지원사업",
-                "category": "금융",
-                "agency": "특허청",
-                "target": "IP보유기업",
-                "period": "2025-03-06 ~ 2025-12-31",
-                "support_amount": "대출지원",
-                "keywords": ["IP", "담보대출", "금융"]
-            },
-            {
-                "id": 9,
-                "name": "2026년 도약(Jump-up) 프로그램",
-                "category": "경영",
-                "agency": "중소벤처기업진흥공단",
-                "target": "성장기업",
-                "period": "2025-11-26 ~ 2025-12-29",
-                "support_amount": "경영지원",
-                "keywords": ["성장", "도약", "경영컨설팅"]
-            },
-            {
-                "id": 10,
-                "name": "2025년 친환경경영(ESG) 컨설팅 지원사업",
-                "category": "경영",
-                "agency": "환경부",
-                "target": "중소·중견기업",
-                "period": "2025-07-31 ~ 2025-12-31",
-                "support_amount": "ESG컨설팅",
-                "keywords": ["ESG", "친환경", "컨설팅"]
-            },
-            {
-                "id": 11,
-                "name": "2025년 하반기 기술창업 자금지원",
-                "category": "금융",
-                "agency": "중소벤처기업진흥공단",
-                "target": "기술창업기업",
-                "period": "2025-07-01 ~ 2025-12-31",
-                "support_amount": "최대 5억원",
-                "keywords": ["창업", "기술", "융자"]
-            },
-            {
-                "id": 12,
-                "name": "2025년 지식재산 경영인증",
-                "category": "경영",
-                "agency": "특허청",
-                "target": "중소기업",
-                "period": "2025-03-24 ~ 2025-12-31",
-                "support_amount": "인증",
-                "keywords": ["지식재산", "IP", "인증"]
-            },
-            {
-                "id": 13,
-                "name": "2025년 안전보건관리체계 구축 컨설팅",
-                "category": "경영",
-                "agency": "고용노동부",
-                "target": "중소사업장",
-                "period": "2025-02-28 ~ 2025-12-31",
-                "support_amount": "컨설팅",
-                "keywords": ["안전", "보건", "컨설팅"]
-            },
-            {
-                "id": 14,
-                "name": "서울 강남구 청년일자리도약장려금",
-                "category": "인력",
-                "agency": "서울 강남구",
-                "target": "청년고용기업",
-                "period": "2025-01-01 ~ 2025-12-31",
-                "support_amount": "인건비 지원",
-                "keywords": ["청년", "일자리", "고용"]
-            },
-            {
-                "id": 15,
-                "name": "2025년 모성보호 및 일육아 지원제도",
-                "category": "인력",
-                "agency": "고용노동부",
-                "target": "전체기업",
-                "period": "2025-01-01 ~ 2025-12-31",
-                "support_amount": "육아지원",
-                "keywords": ["모성보호", "육아", "복지"]
-            },
-            {
-                "id": 16,
-                "name": "2025년 영화영상 로케이션 인센티브",
-                "category": "경영",
-                "agency": "영화진흥위원회",
-                "target": "영상제작사",
-                "period": "2025-01-20 ~ 2025-12-31",
-                "support_amount": "제작비 지원",
-                "keywords": ["영화", "영상", "제작지원"]
-            },
-            {
-                "id": 17,
-                "name": "2025년 해양수산 기술평가사업",
-                "category": "기술",
-                "agency": "해양수산부",
-                "target": "해양수산기업",
-                "period": "2025-02-10 ~ 2025-12-31",
-                "support_amount": "기술평가",
-                "keywords": ["해양수산", "기술평가", "인증"]
-            },
-            {
-                "id": 18,
-                "name": "대전 중소기업 경영안정자금 지원",
-                "category": "금융",
-                "agency": "대전광역시",
-                "target": "중소기업",
-                "period": "2025-07-04 ~ 2025-12-31",
-                "support_amount": "경영안정자금",
-                "keywords": ["경영안정", "융자", "대전"]
-            },
-            {
-                "id": 19,
-                "name": "경기 농어민 기회소득 지원사업",
-                "category": "기타",
-                "agency": "경기도",
-                "target": "농어민",
-                "period": "2025-02-25 ~ 2025-12-31",
-                "support_amount": "소득지원",
-                "keywords": ["농어민", "소득", "지원"]
-            },
-            {
-                "id": 20,
-                "name": "영세개인사업자 체납액 징수특례",
-                "category": "기타",
-                "agency": "국세청",
-                "target": "영세개인사업자",
-                "period": "2020-01-01 ~ 2026-12-31",
-                "support_amount": "세금 징수 특례",
-                "keywords": ["세금", "체납", "특례"]
-            }
-        ];
-
-        let uploadedFile = null;
+        let backendUrl = null;
         let apiKey = null;
-        let inputMode = 'sample'; // 'sample', 'upload', or 'form'
+        let inputMode = 'sample';
         let selectedSample = null;
+        let uploadedFile = null;
 
         // 샘플 데이터
         const sampleProposals = {
             1: `사업명: AI 기반 실시간 건설현장 안전관리 시스템
 
 1. 현재 문제점 (N - NOT)
-
-국내 건설현장의 사망사고율은 OECD 평균의 2.5배에 달하며, 연간 400명 이상의 사망자가 발생하고 있습니다. 현재의 안전관리는 주로 작업자의 경험과 주관적 판단에 의존하고 있으며, 다음과 같은 한계가 있습니다:
-
-- 위험 상황의 실시간 감지 불가능: 안전관리자가 현장을 순회하는 방식으로는 모든 위험을 포착할 수 없습니다
-- 사후 대응 중심: 사고 발생 후 조치만 가능하며 예방적 대응이 미흡합니다
-- 인력 부족: 대규모 현장에서 안전관리 인력이 절대적으로 부족합니다
-- 데이터 축적 미흡: 위험 패턴 분석을 위한 체계적인 데이터 수집이 이루어지지 않습니다
+국내 건설현장의 사망사고율은 OECD 평균의 2.5배에 달하며, 연간 400명 이상의 사망자가 발생하고 있습니다. 현재의 안전관리는 주로 작업자의 경험과 주관적 판단에 의존하고 있으며, 위험 상황의 실시간 감지가 불가능하고 사후 대응 중심이며 안전관리 인력이 부족합니다.
 
 2. 제안 솔루션 (B - BUT)
-
-본 사업은 AI 컴퓨터 비전과 IoT 센서를 결합한 실시간 건설현장 안전관리 시스템을 개발합니다:
-
-핵심 기능:
-1) AI 영상 분석: CCTV 실시간 분석으로 안전모 미착용, 위험구역 접근, 낙하 위험 등 자동 감지
-2) IoT 센서 네트워크: 작업자 위치 추적, 중장비 접근 경보, 유해가스 감지
-3) 실시간 경보 시스템: 위험 감지 즉시 작업자 및 관리자에게 알림 전송
-4) 빅데이터 분석: 위험 패턴 학습을 통한 예측적 안전관리
-
-차별화 요소:
-- 기존 CCTV 인프라 활용으로 도입 비용 최소화
-- 경량화된 엣지 AI로 실시간 처리 가능
-- 국내 건설현장 특화 학습 데이터 기반
+AI 컴퓨터 비전과 IoT 센서를 결합한 실시간 안전관리 시스템으로, CCTV 실시간 분석으로 위험 자동 감지, IoT 센서로 작업자 위치 추적 및 유해가스 감지, 실시간 경보 시스템, 빅데이터 기반 예측적 안전관리를 제공합니다.
 
 3. 근거 및 기대효과 (C - BECAUSE)
-
-기술적 근거:
-- 자체 개발한 AI 모델은 건설현장 위험 상황 인식률 94% 달성 (PoC 테스트 결과)
-- 서울대 건설환경공학부와 공동연구로 3년간 50개 현장 데이터 확보
-- 특허 출원 2건 완료 (AI 기반 낙하사고 예측 시스템, 중장비 충돌방지 알고리즘)
-
-시장성:
-- 국내 건설시장 규모: 연간 200조원
-- 안전관리 시스템 시장: 연평균 15% 성장 중
-- 목표 시장: 대형 건설사 50곳, 중견 건설사 200곳
-
-기대효과:
-- 사고율 70% 감소 목표 (파일럿 테스트에서 65% 감소 확인)
-- 연간 안전사고 비용 2,000억원 절감 가능
-- 일본, 동남아 등 해외 진출 기반 마련
+자체 AI 모델은 건설현장 위험 상황 인식률 94% 달성했으며, 서울대 건설환경공학부와 3년간 50개 현장 데이터 확보했습니다. 특허 2건 출원 완료, 파일럿 테스트에서 사고율 65% 감소 확인, 연간 2,000억원 안전사고 비용 절감 가능합니다.
 
 총 소요 예산: 15억원`,
 
             2: `사업명: 스마트팜 친환경 병해충 예측 및 방제 시스템
 
 1. 현재 문제점 (N - NOT)
-
-국내 농가의 농약 사용량은 ha당 12.1kg으로 OECD 국가 중 1위이며, 이는 환경오염과 식품안전 문제를 야기하고 있습니다. 현재 농업 현장의 병해충 관리는 다음과 같은 문제점이 있습니다:
-
-- 과다한 예방적 농약 살포: 병해충 발생 여부와 관계없이 정기적으로 농약을 살포
-- 경험 의존적 판단: 농민의 육안 관찰과 경험에만 의존하여 초기 발견이 어려움
-- 부적절한 방제 시기: 최적 방제 타이밍을 놓쳐 효과가 떨어지고 농약 사용량만 증가
-- 비용 부담: 농약비가 전체 생산비의 15-20% 차지
-
-특히 고령 농민(평균 67세)은 정확한 병해충 진단이 어렵고, 젊은 농업인은 경험 부족으로 대응이 미흡한 상황입니다.
+국내 농가의 농약 사용량은 ha당 12.1kg으로 OECD 국가 중 1위이며, 과다한 예방적 농약 살포, 경험 의존적 판단으로 초기 발견 어려움, 부적절한 방제 시기로 효과 저하, 농약비가 생산비의 15-20% 차지합니다.
 
 2. 제안 솔루션 (B - BUT)
-
-AI와 IoT를 결합한 친환경 병해충 예측 및 최적 방제 시스템을 개발합니다:
-
-시스템 구성:
-1) 환경 모니터링: 온도, 습도, 일조량, 토양수분 등 실시간 측정
-2) AI 영상 진단: 스마트폰 카메라로 작물 촬영 시 병해충 자동 진단 (정확도 92%)
-3) 예측 알고리즘: 기상 데이터와 환경 데이터 분석으로 병해충 발생 7일 전 예측
-4) 맞춤형 방제 제안: 최소량의 친환경 자재로 최대 효과를 내는 방제법 추천
-5) 농민 커뮤니티: 지역별 발생 정보 공유 및 전문가 상담
-
-기술 특장점:
-- 경량화된 AI 모델로 일반 스마트폰에서 실시간 진단 가능
-- 농촌진흥청 30년 병해충 빅데이터 학습
-- 친환경 자재 우선 추천 알고리즘
+AI 영상 진단(92% 정확도)과 IoT 센서 데이터로 7일 전 병해충 발생 예측, 최적 방제 타이밍 자동 알림, 친환경 방제법 우선 추천, 스마트폰 앱으로 실시간 모니터링을 제공합니다.
 
 3. 근거 및 기대효과 (C - BECAUSE)
-
-기술 검증:
-- 전북 김제시 파프리카 농가 20곳에서 6개월 파일럿 테스트 완료
-- 병해충 발생 예측 정확도 85%, 조기 발견율 90% 달성
-- 농약 사용량 60% 감소, 생산량 15% 증가 확인
-- 농촌진흥청, 전북대 농생명과학과와 MOU 체결
-
-시장성 및 파급효과:
-- 국내 스마트팜 시장: 2030년까지 7조원 규모 전망
-- 타겟 농가: 스마트팜 농가 6,000호 + 일반 시설농가 50,000호
-- 농약 저감으로 연간 3,000억원 경제효과
-- 친환경 농산물 인증 확대로 농가소득 20% 향상
+농촌진흥청 공동연구로 3년간 딸기·토마토 주요 병해충 20종 학습 데이터 확보, 파일럿 농가 10곳에서 농약 사용량 60% 감소 확인, 생산량 15% 증가, 농가당 연간 1,500만원 비용 절감 가능합니다.
 
 총 소요 예산: 12억원`,
 
             3: `사업명: AI 기반 폐플라스틱 자동 분류 및 고부가 재활용 시스템
 
 1. 현재 문제점 (N - NOT)
-
-국내에서 연간 발생하는 폐플라스틱은 약 1,000만톤이지만, 실제 재활용률은 27%에 불과합니다. 나머지는 소각(40%)되거나 매립(33%)되어 심각한 환경문제를 야기합니다. 현재 재활용 시스템의 주요 문제점:
-
-- 수작업 분류의 한계: 작업자가 육안으로 구분하여 정확도 낮음 (60% 수준)
-- 복합재질 처리 불가: PET, PE, PP 등이 혼합된 경우 분류 포기
-- 낮은 재활용 품질: 불순물 혼입으로 저급 재생원료만 생산 가능
-- 열악한 작업환경: 분진, 악취로 인력 확보 어려움
-- 경제성 부족: 저품질 재생원료는 가격 경쟁력 없어 사업성 낮음
-
-특히 음식물이 묻은 용기, 라벨이 붙은 페트병 등은 대부분 재활용되지 못하고 소각됩니다.
+국내 연간 폐플라스틱 1,000만톤 중 실제 재활용률은 27%에 불과하며, 수작업 분류의 정확도 60%, 복합재질 처리 불가, 불순물 혼입으로 저품질 재생원료 생산, 열악한 작업환경으로 인력난이 심각합니다.
 
 2. 제안 솔루션 (B - BUT)
-
-AI 비전과 로봇 기술을 결합한 자동화 폐플라스틱 분류 및 고품질 재생원료 생산 시스템:
-
-핵심 기술:
-1) 하이퍼스펙트럼 AI 분류
-   - 7종 플라스틱 재질 99% 정확도로 자동 인식
-   - 색상, 형태, 오염도까지 동시 분류
-   - 기존 육안 분류 대비 10배 빠른 속도
-
-2) 로봇 피킹 시스템
-   - 컨베이어 벨트 위 플라스틱을 Delta 로봇이 실시간 분류
-   - 분당 120개 처리 가능 (작업자 대비 3배)
-
-3) 고부가 전처리 공정
-   - 레이저 라벨 제거 (페트병 재활용률 95% → 100%)
-   - AI 기반 세척 최적화 (물 사용량 50% 절감)
-
-4) 재생원료 품질 관리
-   - 불순물 0.1% 이하로 관리하여 virgin 수준 달성
-   - 식품용기 재생산 가능한 Food Grade 인증 목표
+하이퍼스펙트럼 AI 비전으로 7종 플라스틱 99% 정확도 자동 인식, Delta 로봇이 분당 120개 처리(기존 육안 대비 10배), 레이저 라벨 제거 및 AI 기반 세척으로 물 사용량 50% 절감, 불순물 0.1% 이하로 Virgin급 품질 생산합니다.
 
 3. 근거 및 기대효과 (C - BECAUSE)
-
-기술 실증:
-- 인천 재활용센터에서 6개월 파일럿 테스트 완료
-- 분류 정확도 99.2%, 처리 속도 시간당 5톤 달성
-- 재생원료 순도 99.8%로 virgin급 품질 확인
-- KAIST 기계공학과, 환경부 순환자원과와 협력
-
-경제성 분석:
-- 고품질 재생 PET 가격: 톤당 150만원 (virgin 대비 80% 수준)
-- 일반 재생 PET 가격: 톤당 50만원 (3배 수익)
-- 투자 회수 기간: 3.5년
-- 연간 처리량: 10,000톤 → 매출 150억원 예상
-
-환경·사회적 가치:
-- 탄소배출 절감: virgin 생산 대비 톤당 CO2 3톤 감소 → 연 30,000톤 저감
-- 해양 플라스틱 저감: 재활용률 향상으로 유입량 20% 감소 기대
+인천 재활용센터 6개월 파일럿에서 분류 정확도 99.2%, 시간당 5톤 처리, 재생원료 순도 99.8% 달성했습니다. KAIST 기계공학과 협력, 고품질 재생 PET는 톤당 150만원(일반 50만원 대비 3배), 연 10,000톤 처리 시 150억원 매출, Virgin 대비 톤당 CO2 3톤 감소 효과가 있습니다.
 
 총 소요 예산: 20억원`,
 
             4: `사업명: AI 심전도 분석 기반 돌연사 예방 웨어러블 디바이스
 
 1. 현재 문제점 (N - NOT)
-
-국내에서 연간 3만명이 심장 돌연사로 사망하며, 이 중 70%는 아무런 전조 증상 없이 발생합니다. 현재 심혈관 질환 관리의 문제점:
-
-- 병원 방문 시에만 검사: 일상생활 중 심장 이상 징후 포착 불가능
-- 증상 발현 후 대응: 골든타임(4분) 내 응급조치 어려움
-- 고위험군 관리 미흡: 당뇨·고혈압 환자의 심혈관 합병증 예측 불가
-- 의료 접근성 제약: 지방·도서 지역 주민의 정기 검진 어려움
-- 고비용: 24시간 홀터 모니터링 검사 비용 30만원, 입원 필요
-
-특히 50대 이상 중장년층과 만성질환자는 돌연사 고위험군이지만, 일상적인 모니터링 수단이 없어 조기 발견이 어렵습니다.
+국내 연간 심장 돌연사 3만명, 이중 70%는 전조증상 없이 발생하며, 기존 웨어러블은 단순 심박수 측정만 가능, 의료기관 심전도 검사는 짧은 측정 시간(10초)으로 간헐적 부정맥 포착 불가, 고령층·만성질환자 일상 모니터링 미흡합니다.
 
 2. 제안 솔루션 (B - BUT)
-
-의료기기 인증을 받은 AI 기반 심전도 분석 웨어러블 디바이스 및 원격 모니터링 플랫폼 개발:
-
-제품 특징:
-1) 패치형 웨어러블 센서
-   - 크기: 3cm × 5cm, 무게 15g (동전 2개 수준)
-   - 부착 위치: 가슴 좌측 (심장 직상부)
-   - 착용 기간: 1회 부착으로 14일 연속 측정
-   - 방수 기능: 샤워·수영 가능
-
-2) 실시간 AI 심전도 분석
-   - 15가지 부정맥 자동 감지 (정확도 97%)
-   - 심근경색 전조 증상 포착 (ST segment 변화)
-   - 심방세동 조기 발견 (뇌졸중 예방)
-   - 개인 맞춤형 심박 패턴 학습
-
-3) 골든타임 대응 시스템
-   - 위급 상황 감지 시 자동으로 119 신고
-   - 보호자 3인에게 실시간 알림 + GPS 위치 전송
-   - 가까운 병원 응급실에 환자 데이터 자동 전송
-
-4) 의료진 원격 모니터링
-   - 담당의가 환자 심전도 24시간 모니터링
-   - 이상 징후 시 문자·전화로 병원 방문 권유
+패치형 센서로 14일 연속 심전도 측정, AI 알고리즘이 17종 부정맥 97% 정확도로 실시간 감지, 위험 시 환자·보호자·의료진에 즉시 알림, 클라우드 기반 장기 데이터 분석으로 돌연사 위험 7일 전 예측합니다.
 
 3. 근거 및 기대효과 (C - BECAUSE)
-
-임상 검증:
-- 삼성서울병원 심장내과와 200명 대상 임상시험 완료
-- 부정맥 감지 정확도: 97.2% (전문의 판독 대비)
-- 심근경색 조기 감지: 발생 평균 2.3시간 전 예측
-- 오탐률 2.8% (기존 웨어러블 대비 1/5 수준)
-- 식약처 의료기기 2등급 인증 신청 중 (2025년 2월 승인 예정)
-
-시장성:
-- 글로벌 웨어러블 헬스케어 시장: 2030년 150조원 (연평균 18% 성장)
-- 국내 타겟: 50대 이상 인구 2,000만명, 만성질환자 1,500만명
-- 1차 목표: 가입자 10만명 (월 구독료 3만원 → 연 360억 매출)
-
-기대효과:
-- 돌연사 30% 감소 목표 (연간 9,000명 생명 구조)
-- 의료비 절감: 조기 발견으로 중증 치료비 감소 → 연 3,000억원
+서울대병원 순환기내과와 2년간 5,000명 심전도 데이터 확보, 의료기기 2등급 인허가 진행 중, 파일럿 병원 3곳에서 부정맥 조기 발견율 85% 향상 확인, 돌연사 30% 감소 목표, 연 3,000억원 의료비 절감 가능합니다.
 
 총 소요 예산: 18억원`,
 
             5: `사업명: 중소 제조기업 맞춤형 저비용 스마트팩토리 솔루션
 
 1. 현재 문제점 (N - NOT)
-
-국내 제조업의 99%를 차지하는 중소기업의 스마트팩토리 도입률은 15%에 불과합니다. 정부가 매년 5,000억원을 지원하고 있지만, 현장 적용률이 낮은 이유는:
-
-- 높은 구축 비용: 기업당 평균 3억원 소요 → 영세기업 부담
-- 복잡한 시스템: IT 전문인력 없는 중소기업은 운영 불가
-- 범용 솔루션의 한계: 대기업용 시스템을 축소한 형태로 현장 맞춤 어려움
-- 투자 대비 효과 불명확: ROI 측정 어려워 도입 결정 망설임
-- 유지보수 부담: 구축 후 관리비용 연 2,000만원 추가 발생
-
-특히 직원 50명 이하 영세 제조기업은 ERP, MES, POP 시스템을 따로 도입할 여력이 없어 여전히 수기 장부와 엑셀로 관리하고 있습니다.
+중소 제조기업의 스마트팩토리 도입률은 15%에 불과하며, 평균 구축비용 3억원으로 부담, 복잡한 시스템으로 운영 인력 부족, 레거시 설비와 호환성 문제, ROI 불확실성으로 투자 주저합니다.
 
 2. 제안 솔루션 (B - BUT)
-
-노코드 기반 조립형 스마트팩토리 솔루션으로 중소기업이 직접 구축하고 운영할 수 있는 시스템 개발:
-
-제품 컨셉: "제조업의 레고"
-- 필요한 기능만 조립식으로 선택
-- IT 지식 없이도 드래그앤드롭으로 설정
-- 월 구독료 방식으로 초기 비용 최소화
-
-핵심 기능 모듈:
-1) 생산관리 (POP): 태블릿으로 작업 시작/종료 터치, 실시간 생산 현황 대시보드
-2) 재고관리: QR코드 스캔으로 입출고 관리, 발주 시점 자동 알림
-3) 설비 관리: IoT 센서로 가동률 모니터링, 고장 예지 알림
-4) 품질관리: 검사 기준 등록, 불량 원인 분석 (AI)
-5) 에너지 관리: 전력 사용량 실시간 모니터링, 설비별 소비 분석
-
-차별화 전략:
-- 초기 비용: 0원 (센서·태블릿 무상 제공)
-- 월 구독료: 30만원 (직원 50인 기준)
-- 맞춤 설정: 업종별 템플릿 제공 (금속가공, 플라스틱, 식품 등)
+노코드 기반 조립형 모듈로 비전문가도 1주일 내 구축, 월 30만원 구독형 모델로 초기 투자 부담 제로, 기존 설비 80% 활용 가능한 IoT 센서 키트, 실시간 생산 모니터링 및 AI 기반 불량 예측을 제공합니다.
 
 3. 근거 및 기대효과 (C - BECAUSE)
-
-파일럿 테스트:
-- 안산 시화공단 중소기업 30곳 6개월 운영
-- 평균 생산성 25% 향상 확인
-- 불량률 40% 감소
-- 재고 회전일 15일 단축
-- 에너지 비용 18% 절감
-- 만족도: 9.2/10점 (재계약률 97%)
-
-비용 효과 분석:
-- 구축 비용: 기존 3억원 → 본 솔루션 0원
-- 월 운영비: 기존 200만원 → 30만원
-- 투자 회수: 6개월
-- 3년 총 절감액: 기업당 1.2억원
-
-시장성:
-- 국내 중소 제조기업: 32만개사
-- 1차 목표: 5년간 3,000개사 (시장점유율 1%)
-- 예상 매출: 연 108억원
+경기도 중소기업 20곳 파일럿에서 평균 구축비 90% 절감(3,000만원), 생산성 25% 향상, 불량률 40% 감소, 투자 회수 기간 1.5년 확인했습니다. 산업부 스마트제조혁신추진단 협력, 5년간 중소기업 1,000곳 보급 목표입니다.
 
 총 소요 예산: 15억원`
         };
 
-        // 초기화
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('N2B 앱 시작!');
-            loadApiKey();
-            setupEventListeners();
-            console.log('초기화 완료');
-            console.log('초기 모드:', inputMode);
-        });
+        // 설정 저장
+        function saveConfig() {
+            const urlInput = document.getElementById('backendUrl').value.trim();
+            const keyInput = document.getElementById('apiKeyInput').value.trim();
+            const statusEl = document.getElementById('configStatus');
+            
+            if (!urlInput) {
+                statusEl.innerHTML = '<span style="color: red;">❌ 백엔드 URL을 입력해주세요!</span>';
+                statusEl.style.background = '#ffe0e0';
+                return;
+            }
+            
+            if (!keyInput) {
+                statusEl.innerHTML = '<span style="color: red;">❌ API 키를 입력해주세요!</span>';
+                statusEl.style.background = '#ffe0e0';
+                return;
+            }
+            
+            if (!keyInput.startsWith('sk-ant-')) {
+                statusEl.innerHTML = '<span style="color: red;">❌ API 키는 "sk-ant-"로 시작해야 합니다!</span>';
+                statusEl.style.background = '#ffe0e0';
+                return;
+            }
+            
+            backendUrl = urlInput;
+            apiKey = keyInput;
+            
+            localStorage.setItem('n2b_backend_url', urlInput);
+            localStorage.setItem('n2b_api_key', keyInput);
+            
+            statusEl.innerHTML = '<span style="color: green;">✅ 설정이 저장되었습니다!</span>';
+            statusEl.style.background = '#d4edda';
+            
+            checkAnalyzeButton();
+        }
 
-        // API 키 관리
-        function loadApiKey() {
-            const savedApiKey = localStorage.getItem('anthropic_api_key');
-            if (savedApiKey) {
-                apiKey = savedApiKey;
-                document.getElementById('apiKeyInput').value = savedApiKey;
-                updateApiKeyStatus(true);
+        // 페이지 로드 시 설정 불러오기
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedUrl = localStorage.getItem('n2b_backend_url');
+            const savedKey = localStorage.getItem('n2b_api_key');
+            
+            if (savedUrl) {
+                document.getElementById('backendUrl').value = savedUrl;
+                backendUrl = savedUrl;
+            }
+            
+            if (savedKey) {
+                document.getElementById('apiKeyInput').value = savedKey;
+                apiKey = savedKey;
+            }
+            
+            if (savedUrl && savedKey) {
+                const statusEl = document.getElementById('configStatus');
+                statusEl.innerHTML = '<span style="color: green;">✅ 이전 설정을 불러왔습니다</span>';
+                statusEl.style.background = '#d4edda';
                 checkAnalyzeButton();
             }
-        }
+        });
 
-        function updateApiKeyStatus(isValid) {
-            const statusEl = document.getElementById('apiKeyStatus');
-            if (isValid) {
-                statusEl.innerHTML = '<span style="color: green;">✓ API 키가 저장되어 있습니다</span>';
-            } else {
-                statusEl.innerHTML = '<span style="color: red;">❌ 올바른 API 키 형식이 아닙니다</span>';
-            }
-        }
-
-        // 이벤트 리스너 설정
-        function setupEventListeners() {
-            // API 키 저장
-            document.getElementById('saveApiKeyBtn').addEventListener('click', () => {
-                const key = document.getElementById('apiKeyInput').value.trim();
-                const statusEl = document.getElementById('apiKeyStatus');
-                
-                if (!key) {
-                    statusEl.innerHTML = '<span style="color: red;">❌ API 키를 입력해주세요!</span>';
-                    return;
-                }
-                
-                if (key.startsWith('sk-ant-')) {
-                    apiKey = key;
-                    localStorage.setItem('anthropic_api_key', key);
-                    statusEl.innerHTML = '<span style="color: green;">✅ API 키가 저장되었습니다!</span>';
-                    checkAnalyzeButton();
-                } else {
-                    apiKey = null;
-                    statusEl.innerHTML = '<span style="color: red;">❌ API 키는 "sk-ant-"로 시작해야 합니다!</span>';
-                }
-            });
-
-            // 탭 전환
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.addEventListener('click', () => {
-                    const tabName = tab.dataset.tab;
-                    switchTab(tabName);
-                });
-            });
-
-            // 샘플 카드 클릭
-            document.querySelectorAll('.sample-card').forEach(card => {
-                card.addEventListener('click', function(event) {
-                    const sampleId = parseInt(this.dataset.sample);
-                    selectSample(sampleId, this);
-                });
-            });
-
-            // 파일 업로드
-            const uploadArea = document.getElementById('uploadArea');
-            const fileInput = document.getElementById('fileInput');
-
-            uploadArea.addEventListener('click', () => fileInput.click());
-
-            uploadArea.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                uploadArea.style.background = '#f0f4ff';
-            });
-
-            uploadArea.addEventListener('dragleave', () => {
-                uploadArea.style.background = 'white';
-            });
-
-            uploadArea.addEventListener('drop', (e) => {
-                e.preventDefault();
-                uploadArea.style.background = 'white';
-                const file = e.dataTransfer.files[0];
-                handleFile(file);
-            });
-
-            fileInput.addEventListener('change', (e) => {
-                const file = e.target.files[0];
-                handleFile(file);
-            });
-
-            // 폼 입력 변경 감지
-            ['projectName', 'problemN', 'solutionB', 'evidenceC'].forEach(id => {
-                document.getElementById(id).addEventListener('input', checkAnalyzeButton);
-            });
-
-            // 분석 버튼
-            document.getElementById('analyzeBtn').addEventListener('click', startAnalysis);
-        }
-
+        // 탭 전환
         function switchTab(tabName) {
             inputMode = tabName;
-
-            // 탭 활성화
+            
             document.querySelectorAll('.tab').forEach(tab => {
                 tab.classList.remove('active');
             });
             document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
-
-            // 탭 콘텐츠 표시
+            
             document.querySelectorAll('.tab-content').forEach(content => {
                 content.classList.remove('active');
             });
             document.getElementById(`${tabName}-tab`).classList.add('active');
-
-            // 다른 탭으로 전환 시 선택 초기화
+            
             if (tabName !== 'sample') {
                 selectedSample = null;
                 document.querySelectorAll('.sample-card').forEach(card => {
@@ -1334,143 +793,36 @@ AI 비전과 로봇 기술을 결합한 자동화 폐플라스틱 분류 및 고
             }
             if (tabName !== 'upload') {
                 uploadedFile = null;
+                document.getElementById('fileName').textContent = '';
             }
-
+            
             checkAnalyzeButton();
         }
 
-        function selectSample(sampleId, cardElement) {
-            console.log('샘플 선택 시도:', sampleId);
-            
-            // 모든 카드 선택 해제
+        // 샘플 선택
+        function selectSample(sampleId) {
             document.querySelectorAll('.sample-card').forEach(card => {
                 card.classList.remove('selected');
             });
-
-            // 선택된 카드 활성화
-            if (cardElement) {
-                cardElement.classList.add('selected');
-            } else {
-                const selectedCard = document.querySelector(`[data-sample="${sampleId}"]`);
-                if (selectedCard) {
-                    selectedCard.classList.add('selected');
-                }
-            }
             
+            document.querySelector(`[data-sample="${sampleId}"]`).classList.add('selected');
             selectedSample = sampleId;
-            console.log('샘플 선택 완료:', selectedSample);
-
+            
             checkAnalyzeButton();
         }
 
-        function handleFile(file) {
-            if (file) {
-                uploadedFile = file;
-                const uploadArea = document.getElementById('uploadArea');
-                uploadArea.innerHTML = `
-                    <div class="upload-icon">✅</div>
-                    <h3>${file.name}</h3>
-                    <p>파일 크기: ${(file.size / 1024).toFixed(2)} KB</p>
-                `;
-                checkAnalyzeButton();
-            }
-        }
-
-        function checkAnalyzeButton() {
-            const analyzeBtn = document.getElementById('analyzeBtn');
-            let canAnalyze = false;
-
-            const debugInfo = {
-                apiKey: apiKey ? '있음 (' + apiKey.substring(0, 15) + '...)' : '없음',
-                apiKeyValid: apiKey && apiKey.startsWith('sk-ant-') ? 'O' : 'X',
-                inputMode: inputMode,
-                selectedSample: selectedSample || '없음',
-                uploadedFile: uploadedFile ? uploadedFile.name : '없음'
-            };
+        // 파일 업로드
+        async function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
             
-            console.log('버튼 활성화 체크:', debugInfo);
-
-            if (apiKey && apiKey.startsWith('sk-ant-')) {
-                if (inputMode === 'sample' && selectedSample) {
-                    canAnalyze = true;
-                    console.log('샘플 모드 - 활성화!');
-                } else if (inputMode === 'upload' && uploadedFile) {
-                    canAnalyze = true;
-                    console.log('업로드 모드 - 활성화!');
-                } else if (inputMode === 'form') {
-                    const projectName = document.getElementById('projectName').value.trim();
-                    const problemN = document.getElementById('problemN').value.trim();
-                    const solutionB = document.getElementById('solutionB').value.trim();
-                    const evidenceC = document.getElementById('evidenceC').value.trim();
-                    
-                    if (projectName && problemN && solutionB && evidenceC) {
-                        canAnalyze = true;
-                        console.log('폼 모드 - 활성화!');
-                    }
-                } else {
-                    console.log('모드:', inputMode, '- 조건 미충족');
-                }
-            } else {
-                console.log('API 키 문제');
-            }
-
-            analyzeBtn.disabled = !canAnalyze;
-            console.log('최종 버튼 상태:', canAnalyze ? '활성화' : '비활성화');
+            uploadedFile = await readFile(file);
+            document.getElementById('fileName').textContent = `📄 ${file.name}`;
+            
+            checkAnalyzeButton();
         }
 
-        async function startAnalysis() {
-            if (!apiKey || !apiKey.startsWith('sk-ant-')) {
-                alert('먼저 Anthropic API 키를 입력하고 저장해주세요.');
-                return;
-            }
-
-            const resultsDiv = document.getElementById('results');
-            resultsDiv.style.display = 'block';
-            resultsDiv.innerHTML = `
-                <div class="loading">
-                    <div class="spinner"></div>
-                    <p>N2B 분석 및 정부지원사업 매칭 중...</p>
-                </div>
-            `;
-
-            try {
-                let proposalText = '';
-
-                if (inputMode === 'sample') {
-                    proposalText = sampleProposals[selectedSample];
-                } else if (inputMode === 'upload') {
-                    proposalText = await readFile(uploadedFile);
-                } else {
-                    const projectName = document.getElementById('projectName').value.trim();
-                    const problemN = document.getElementById('problemN').value.trim();
-                    const solutionB = document.getElementById('solutionB').value.trim();
-                    const evidenceC = document.getElementById('evidenceC').value.trim();
-                    
-                    proposalText = `사업명: ${projectName}\n\n현재 문제점:\n${problemN}\n\n제안 솔루션:\n${solutionB}\n\n근거 및 기대효과:\n${evidenceC}`;
-                }
-
-                // N2B 분석
-                const n2bAnalysis = await analyzeN2B(proposalText);
-
-                // 정책 매칭
-                const matchedPrograms = await matchPrograms(n2bAnalysis);
-
-                // 결과 표시
-                displayResults(n2bAnalysis, matchedPrograms);
-
-            } catch (error) {
-                resultsDiv.innerHTML = `
-                    <div class="error">
-                        <h3>❌ 오류 발생</h3>
-                        <p>${error.message}</p>
-                        <p style="margin-top: 10px; font-size: 0.9em;">API 키가 유효한지 확인해주세요.</p>
-                    </div>
-                `;
-                console.error('Error:', error);
-            }
-        }
-
-        async function readFile(file) {
+        function readFile(file) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
                 reader.onload = (e) => resolve(e.target.result);
@@ -1479,160 +831,145 @@ AI 비전과 로봇 기술을 결합한 자동화 폐플라스틱 분류 및 고
             });
         }
 
-        async function analyzeN2B(text) {
-            const response = await fetch("https://api.anthropic.com/v1/messages", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "x-api-key": apiKey,
-                    "anthropic-version": "2023-06-01"
-                },
-                body: JSON.stringify({
-                    model: "claude-sonnet-4-20250514",
-                    max_tokens: 1500,
-                    messages: [{
-                        role: "user",
-                        content: `다음 R&D 제안서를 N2B 프레임워크로 분석해주세요.
-
-N2B 프레임워크:
-- N (NOT): 현재의 문제점, 한계, 부족한 점
-- B (BUT): 제안하는 새로운 해결책, 혁신
-- C (BECAUSE): 근거, 이유, 증거
-
-제안서:
-${text.substring(0, 4000)}
-
-JSON 형식으로 답변해주세요:
-{
-  "N": "현재 문제점 요약",
-  "B": "제안 솔루션 요약",
-  "C": "근거와 이유 요약",
-  "keywords": ["키워드1", "키워드2", "키워드3", "키워드4", "키워드5"]
-}`
-                    }]
-                })
-            });
-
-            if (!response.ok) {
-                const error = await response.json();
-                throw new Error(error.error?.message || 'API 호출 실패');
+        // 버튼 활성화 체크
+        function checkAnalyzeButton() {
+            const analyzeBtn = document.getElementById('analyzeBtn');
+            let canAnalyze = false;
+            
+            if (backendUrl && apiKey && apiKey.startsWith('sk-ant-')) {
+                if (inputMode === 'sample' && selectedSample) {
+                    canAnalyze = true;
+                } else if (inputMode === 'upload' && uploadedFile) {
+                    canAnalyze = true;
+                } else if (inputMode === 'form') {
+                    const projectName = document.getElementById('projectName').value.trim();
+                    const problemN = document.getElementById('problemN').value.trim();
+                    const solutionB = document.getElementById('solutionB').value.trim();
+                    const evidenceC = document.getElementById('evidenceC').value.trim();
+                    
+                    if (projectName && problemN && solutionB && evidenceC) {
+                        canAnalyze = true;
+                    }
+                }
             }
-
-            const data = await response.json();
-            const content = data.content[0].text;
-            const jsonMatch = content.match(/\{[\s\S]*\}/);
-            return JSON.parse(jsonMatch[0]);
+            
+            analyzeBtn.disabled = !canAnalyze;
         }
 
-        async function matchPrograms(n2bAnalysis) {
-            const response = await fetch("https://api.anthropic.com/v1/messages", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "x-api-key": apiKey,
-                    "anthropic-version": "2023-06-01"
-                },
-                body: JSON.stringify({
-                    model: "claude-sonnet-4-20250514",
-                    max_tokens: 2500,
-                    messages: [{
-                        role: "user",
-                        content: `다음 N2B 분석 결과와 가장 적합한 정부지원사업 3개를 추천하고, 각각의 적합도(1-10점)와 구체적인 추천 이유를 제시해주세요.
+        // 폼 입력 감지
+        ['projectName', 'problemN', 'solutionB', 'evidenceC'].forEach(id => {
+            document.getElementById(id).addEventListener('input', checkAnalyzeButton);
+        });
 
-N2B 분석:
-${JSON.stringify(n2bAnalysis, null, 2)}
-
-정부지원사업 목록:
-${JSON.stringify(govPrograms, null, 2)}
-
-JSON 형식으로 답변해주세요:
-{
-  "matches": [
-    {
-      "program_id": 숫자,
-      "score": 1-10점,
-      "reason": "이 사업을 추천하는 구체적인 이유 (2-3문장)"
-    }
-  ]
-}
-
-가장 적합도가 높은 순서대로 정확히 3개를 추천해주세요.`
-                    }]
-                })
-            });
-
-            if (!response.ok) {
-                const error = await response.json();
-                throw new Error(error.error?.message || 'API 호출 실패');
-            }
-
-            const data = await response.json();
-            const content = data.content[0].text;
-            const jsonMatch = content.match(/\{[\s\S]*\}/);
-            const matchResult = JSON.parse(jsonMatch[0]);
-
-            return matchResult.matches.map(m => ({
-                ...govPrograms.find(p => p.id === m.program_id),
-                score: m.score,
-                reason: m.reason
-            }));
-        }
-
-        function displayResults(n2bAnalysis, matchedPrograms) {
-            const resultsDiv = document.getElementById('results');
-
-            resultsDiv.innerHTML = `
-                <h2 class="section-title">📊 N2B 분석 결과</h2>
+        // 분석 시작
+        async function startAnalysis() {
+            // 입력 데이터 수집
+            let proposalText = '';
+            
+            if (inputMode === 'sample') {
+                proposalText = sampleProposals[selectedSample];
+            } else if (inputMode === 'upload') {
+                proposalText = uploadedFile;
+            } else if (inputMode === 'form') {
+                const projectName = document.getElementById('projectName').value.trim();
+                const problemN = document.getElementById('problemN').value.trim();
+                const solutionB = document.getElementById('solutionB').value.trim();
+                const evidenceC = document.getElementById('evidenceC').value.trim();
                 
-                <div class="result-card">
-                    <h3>🚫 N (NOT) - 현재의 문제점</h3>
-                    <div class="content">${n2bAnalysis.N}</div>
-                </div>
+                proposalText = `사업명: ${projectName}\n\n1. 현재 문제점 (N - NOT)\n${problemN}\n\n2. 제안 솔루션 (B - BUT)\n${solutionB}\n\n3. 근거 및 기대효과 (C - BECAUSE)\n${evidenceC}`;
+            }
+            
+            // UI 업데이트
+            document.getElementById('results').classList.remove('active');
+            document.getElementById('loading').classList.add('active');
+            
+            try {
+                // 1단계: N2B 분석
+                const n2bResult = await callBackend('analyze', {
+                    apiKey: apiKey,
+                    proposalText: proposalText
+                });
+                
+                if (n2bResult.error) {
+                    throw new Error(n2bResult.error);
+                }
+                
+                // 결과 표시
+                document.getElementById('resultN').textContent = n2bResult.N;
+                document.getElementById('resultB').textContent = n2bResult.B;
+                document.getElementById('resultC').textContent = n2bResult.C;
+                
+                // 2단계: 정책 매칭
+                const matchResult = await callBackend('match', {
+                    apiKey: apiKey,
+                    n2bAnalysis: n2bResult
+                });
+                
+                if (matchResult.error) {
+                    throw new Error(matchResult.error);
+                }
+                
+                // 정책 결과 표시
+                displayProgramMatches(matchResult.matches);
+                
+                // 결과 표시
+                document.getElementById('loading').classList.remove('active');
+                document.getElementById('results').classList.add('active');
+                document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+                
+            } catch (error) {
+                document.getElementById('loading').classList.remove('active');
+                alert('❌ 오류 발생\n' + error.message + '\n\n설정을 확인해주세요.');
+            }
+        }
 
-                <div class="result-card">
-                    <h3>💡 B (BUT) - 제안하는 솔루션</h3>
-                    <div class="content">${n2bAnalysis.B}</div>
-                </div>
+        // 백엔드 호출
+        async function callBackend(action, data) {
+            const response = await fetch(backendUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    action: action,
+                    ...data
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error('백엔드 호출 실패: ' + response.status);
+            }
+            
+            return await response.json();
+        }
 
-                <div class="result-card">
-                    <h3>✓ C (BECAUSE) - 근거와 이유</h3>
-                    <div class="content">${n2bAnalysis.C}</div>
-                </div>
-
-                <h2 class="section-title" style="margin-top: 40px;">🎯 추천 정부지원사업 (Top 3)</h2>
-
-                ${matchedPrograms.map((p, index) => `
-                    <div class="program-card">
-                        <span class="match-score">매칭도: ${p.score}/10</span>
-                        <h4>${index + 1}. ${p.name}</h4>
-                        <div class="program-meta">
-                            <span class="meta-tag">📋 ${p.category}</span>
-                            <span class="meta-tag">🏢 ${p.agency}</span>
-                            <span class="meta-tag">📅 ${p.period}</span>
-                            <span class="meta-tag">💰 ${p.support_amount}</span>
-                        </div>
-                        <div class="program-reason">
-                            <strong>💬 추천 이유:</strong><br>
-                            ${p.reason}
-                        </div>
+        // 정책 매칭 결과 표시
+        function displayProgramMatches(matches) {
+            const container = document.getElementById('programResults');
+            container.innerHTML = '';
+            
+            matches.forEach((match, index) => {
+                const program = match.program;
+                const card = document.createElement('div');
+                card.className = 'program-card';
+                card.innerHTML = `
+                    <div class="program-header">
+                        <div class="program-title">${index + 1}위: ${program.name}</div>
+                        <div class="match-score">매칭도 ${match.score}/10</div>
                     </div>
-                `).join('')}
-
-                <div class="result-card" style="margin-top: 30px; background: #f0f4ff;">
-                    <h3>📌 다음 단계</h3>
-                    <div class="content">
-                        <ol style="line-height: 2; margin-left: 20px;">
-                            <li>추천된 지원사업의 상세 공고를 <a href="https://www.bizinfo.go.kr" target="_blank" style="color: #667eea; font-weight: 600;">기업마당</a>에서 확인하세요</li>
-                            <li>지원자격 요건을 꼼꼼히 검토하세요</li>
-                            <li>신청 마감일을 확인하고 일정을 계획하세요</li>
-                            <li>필요한 서류를 준비하고 제안서를 보완하세요</li>
-                        </ol>
+                    <div class="program-meta">
+                        <span class="meta-tag">🏢 ${program.agency}</span>
+                        <span class="meta-tag">🎯 ${program.target}</span>
+                        <span class="meta-tag">📅 ${program.period}</span>
+                        <span class="meta-tag">💰 ${program.support_amount}</span>
                     </div>
-                </div>
-            `;
-
-            // 결과로 스크롤
-            resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    <div class="program-reason">
+                        <strong>추천 이유:</strong><br>
+                        ${match.reason}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
         }
     </script>
 </body>
