@@ -924,16 +924,14 @@ AI 영상 진단(92% 정확도)과 IoT 센서 데이터로 7일 전 병해충 �
         }
 
         // 백엔드 호출
-        async function callBackend(action, data) {
-            const response = await fetch(backendUrl, {
+               async function callBackend(action, data) {
+            const url = backendUrl + '/' + action;
+            const response = await fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    action: action,
-                    ...data
-                })
+                body: JSON.stringify(data)
             });
             
             if (!response.ok) {
@@ -942,6 +940,7 @@ AI 영상 진단(92% 정확도)과 IoT 센서 데이터로 7일 전 병해충 �
             
             return await response.json();
         }
+
 
         // 정책 매칭 결과 표시
         function displayProgramMatches(matches) {
