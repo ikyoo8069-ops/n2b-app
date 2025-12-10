@@ -3,972 +3,315 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>N2B - 정부 R&D 정책자금 매칭</title>
+    <title>N2B 정부지원사업 매칭 v3.1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
+        .gradient-bg {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
         }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            padding: 0;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
-        }
-        
-        /* 헤더 */
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-        
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-        
-        .header .subtitle {
-            font-size: 1.2em;
-            opacity: 0.95;
-        }
-        
-        /* 설정 섹션 */
-        .setup-section {
-            padding: 30px;
-            background: #f8f9ff;
-            border-bottom: 2px solid #e0e0e0;
-        }
-        
-        .setup-section h3 {
-            color: #333;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .config-row {
-            margin-bottom: 15px;
-        }
-        
-        .config-row label {
-            display: block;
-            margin-bottom: 5px;
-            color: #666;
-            font-size: 0.9em;
-        }
-        
-        .config-row input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1em;
-        }
-        
-        .config-row input:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-        
-        .save-btn {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        
-        .save-btn:hover {
-            background: #5568d3;
+        .card-hover:hover {
             transform: translateY(-2px);
-        }
-        
-        .status {
-            margin-top: 10px;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 0.9em;
-        }
-        
-        /* 내용 섹션 */
-        .content {
-            padding: 30px;
-        }
-        
-        .section {
-            margin-bottom: 30px;
-        }
-        
-        .section h3 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-        }
-        
-        /* 탭 */
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #e0e0e0;
-        }
-        
-        .tab {
-            padding: 12px 24px;
-            background: none;
-            border: none;
-            border-bottom: 3px solid transparent;
-            cursor: pointer;
-            font-size: 1em;
-            color: #666;
-            transition: all 0.3s;
-        }
-        
-        .tab.active {
-            color: #667eea;
-            border-bottom-color: #667eea;
-            font-weight: 600;
-        }
-        
-        .tab-content {
-            display: none;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        /* 샘플 그리드 */
-        .sample-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 15px;
-        }
-        
-        .sample-card {
-            background: linear-gradient(135deg, #f8f9ff 0%, #e8ebff 100%);
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-        }
-        
-        .sample-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
-            border-color: #667eea;
-        }
-        
-        .sample-card.selected {
-            border-color: #667eea;
-            border-width: 3px;
-            background: linear-gradient(135deg, #e8ebff 0%, #d4d9ff 100%);
-        }
-        
-        .sample-card.selected::after {
-            content: '✓';
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #667eea;
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-        
-        .sample-number {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #667eea;
-            color: white;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8em;
-            font-weight: bold;
-        }
-        
-        .sample-card.selected .sample-number {
-            display: none;
-        }
-        
-        .sample-title {
-            font-size: 1.2em;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 10px;
-            padding-right: 35px;
-        }
-        
-        .sample-tags {
-            display: flex;
-            gap: 5px;
-            flex-wrap: wrap;
-            margin-bottom: 10px;
-        }
-        
-        .sample-tag {
-            background: #667eea;
-            color: white;
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-size: 0.75em;
-        }
-        
-        .sample-desc {
-            color: #666;
-            font-size: 0.9em;
-            margin-bottom: 10px;
-        }
-        
-        .sample-budget {
-            color: #667eea;
-            font-weight: 600;
-            font-size: 0.95em;
-        }
-        
-        /* 파일 업로드 */
-        .file-upload {
-            border: 2px dashed #667eea;
-            border-radius: 12px;
-            padding: 30px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .file-upload:hover {
-            background: #f8f9ff;
-            border-color: #5568d3;
-        }
-        
-        .file-upload input {
-            display: none;
-        }
-        
-        /* 폼 입력 */
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #333;
-            font-weight: 600;
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1em;
-            font-family: inherit;
-        }
-        
-        .form-group textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-        
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-        
-        /* 분석 버튼 */
-        .analyze-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 18px 40px;
-            border-radius: 30px;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.3s;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-        }
-        
-        .analyze-btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
-        }
-        
-        .analyze-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            box-shadow: none;
-        }
-        
-        /* 로딩 */
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 40px;
-        }
-        
-        .loading.active {
-            display: block;
-        }
-        
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #667eea;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* 결과 */
-        .results {
-            display: none;
-            margin-top: 30px;
-        }
-        
-        .results.active {
-            display: block;
-        }
-        
-        .result-card {
-            background: #f8f9ff;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .result-card h4 {
-            color: #667eea;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .result-text {
-            color: #333;
-            line-height: 1.8;
-            white-space: pre-wrap;
-        }
-        
-        .program-card {
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 15px;
-        }
-        
-        .program-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 15px;
-        }
-        
-        .program-title {
-            font-size: 1.2em;
-            font-weight: 600;
-            color: #333;
-            flex: 1;
-        }
-        
-        .match-score {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 1.1em;
-        }
-        
-        .program-meta {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
-        }
-        
-        .meta-tag {
-            background: #e8ebff;
-            color: #667eea;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.85em;
-        }
-        
-        .program-reason {
-            color: #666;
-            line-height: 1.8;
-            padding: 15px;
-            background: #f8f9ff;
-            border-radius: 8px;
-        }
-        
-        /* 반응형 */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.8em;
-            }
-            
-            .sample-grid {
-                grid-template-columns: 1fr;
-            }
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <!-- 헤더 -->
-        <div class="header">
-            <h1>🎯 N2B</h1>
-            <p class="subtitle">정부 R&D 정책자금 매칭 시스템</p>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg text-white py-6 shadow-lg">
+        <div class="container mx-auto px-4">
+            <h1 class="text-3xl font-bold">🚀 N2B 정부지원사업 매칭</h1>
+            <p class="text-purple-100 mt-1">v3.1 - 지역 필터링 지원 | 97,794개 정책 DB</p>
         </div>
-        
-        <!-- 설정 섹션 -->
-        <div class="setup-section">
-            <h3>⚙️ 설정</h3>
-            
-            <div class="config-row">
-                <label>Google Apps Script 백엔드 URL</label>
-                <input 
-                    type="text" 
-                    id="backendUrl" 
-                    placeholder="https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec"
-                >
-            </div>
-            
-            <div class="config-row">
-                <label>Anthropic API 키</label>
-                <input 
-                    type="password" 
-                    id="apiKeyInput" 
-                    placeholder="sk-ant-api03-..."
-                >
-            </div>
-            
-            <button class="save-btn" onclick="saveConfig()">💾 설정 저장</button>
-            <div id="configStatus" class="status"></div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- API Key Input -->
+        <div class="bg-white rounded-xl shadow-md p-6 mb-6">
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+                🔑 Anthropic API Key
+            </label>
+            <input type="password" id="apiKey" 
+                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                   placeholder="sk-ant-api...">
         </div>
-        
-        <!-- 메인 콘텐츠 -->
-        <div class="content">
-            <!-- 입력 섹션 -->
-            <div class="section">
-                <h3>📝 사업계획서 입력</h3>
-                
-                <div class="tabs">
-                    <button class="tab active" data-tab="sample" onclick="switchTab('sample')">🎯 샘플 선택</button>
-                    <button class="tab" data-tab="upload" onclick="switchTab('upload')">📄 파일 업로드</button>
-                    <button class="tab" data-tab="form" onclick="switchTab('form')">✍️ 직접 입력</button>
-                </div>
-                
-                <!-- 샘플 선택 탭 -->
-                <div id="sample-tab" class="tab-content active">
-                    <div class="sample-grid">
-                        <div class="sample-card" data-sample="1" onclick="selectSample(1)">
-                            <div class="sample-number">1</div>
-                            <div class="sample-title">AI 건설 안전관리</div>
-                            <div class="sample-tags">
-                                <span class="sample-tag">건설</span>
-                                <span class="sample-tag">AI</span>
-                            </div>
-                            <div class="sample-desc">실시간 위험 감지 및 예방적 안전관리</div>
-                            <div class="sample-budget">💰 15억원</div>
-                        </div>
-                        
-                        <div class="sample-card" data-sample="2" onclick="selectSample(2)">
-                            <div class="sample-number">2</div>
-                            <div class="sample-title">스마트팜 병해충 예측</div>
-                            <div class="sample-tags">
-                                <span class="sample-tag">농업</span>
-                                <span class="sample-tag">IoT</span>
-                            </div>
-                            <div class="sample-desc">AI 영상 진단으로 농약 사용 60% 감소</div>
-                            <div class="sample-budget">💰 12억원</div>
-                        </div>
-                        
-                        <div class="sample-card" data-sample="3" onclick="selectSample(3)">
-                            <div class="sample-number">3</div>
-                            <div class="sample-title">폐플라스틱 재활용</div>
-                            <div class="sample-tags">
-                                <span class="sample-tag">환경</span>
-                                <span class="sample-tag">ESG</span>
-                            </div>
-                            <div class="sample-desc">99% 정확도 AI 분류로 Virgin급 재생원료</div>
-                            <div class="sample-budget">💰 20억원</div>
-                        </div>
-                        
-                        <div class="sample-card" data-sample="4" onclick="selectSample(4)">
-                            <div class="sample-number">4</div>
-                            <div class="sample-title">헬스케어 웨어러블</div>
-                            <div class="sample-tags">
-                                <span class="sample-tag">의료</span>
-                                <span class="sample-tag">AI</span>
-                            </div>
-                            <div class="sample-desc">AI 심전도 분석으로 돌연사 예방</div>
-                            <div class="sample-budget">💰 18억원</div>
-                        </div>
-                        
-                        <div class="sample-card" data-sample="5" onclick="selectSample(5)">
-                            <div class="sample-number">5</div>
-                            <div class="sample-title">스마트팩토리 솔루션</div>
-                            <div class="sample-tags">
-                                <span class="sample-tag">제조</span>
-                                <span class="sample-tag">디지털</span>
-                            </div>
-                            <div class="sample-desc">중소기업 맞춤형 저비용 스마트팩토리</div>
-                            <div class="sample-budget">💰 15억원</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 파일 업로드 탭 -->
-                <div id="upload-tab" class="tab-content">
-                    <div class="file-upload" onclick="document.getElementById('fileInput').click()">
-                        <input type="file" id="fileInput" accept=".txt,.docx,.pdf" onchange="handleFileUpload(event)">
-                        <p style="font-size: 3em; margin-bottom: 10px;">📄</p>
-                        <p style="color: #667eea; font-weight: 600; margin-bottom: 5px;">파일 선택 또는 드래그 앤 드롭</p>
-                        <p style="color: #999; font-size: 0.9em;">지원 형식: TXT, DOCX, PDF</p>
-                    </div>
-                    <div id="fileName" style="margin-top: 15px; color: #667eea; font-weight: 600;"></div>
-                </div>
-                
-                <!-- 직접 입력 탭 -->
-                <div id="form-tab" class="tab-content">
-                    <div class="form-group">
-                        <label>사업명</label>
-                        <input type="text" id="projectName" placeholder="예: AI 기반 건설현장 안전관리 시스템">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>N (NOT) - 현재의 문제점</label>
-                        <textarea id="problemN" placeholder="해결하고자 하는 문제, 현재의 한계점을 기술하세요"></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>B (BUT) - 제안하는 솔루션</label>
-                        <textarea id="solutionB" placeholder="어떤 혁신적인 해결책을 제안하는지 기술하세요"></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>C (BECAUSE) - 근거 및 기대효과</label>
-                        <textarea id="evidenceC" placeholder="왜 이 솔루션이 효과적인지, 어떤 성과를 기대하는지 기술하세요"></textarea>
-                    </div>
+
+        <!-- Region Filter -->
+        <div class="bg-white rounded-xl shadow-md p-6 mb-6">
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+                📍 지역 선택
+            </label>
+            <select id="regionSelect" 
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white">
+                <option value="전체">🇰🇷 전체 (전국)</option>
+                <option value="서울">서울특별시</option>
+                <option value="부산">부산광역시</option>
+                <option value="대구">대구광역시</option>
+                <option value="인천">인천광역시</option>
+                <option value="광주">광주광역시</option>
+                <option value="대전">대전광역시</option>
+                <option value="울산">울산광역시</option>
+                <option value="세종">세종특별자치시</option>
+                <option value="경기">경기도</option>
+                <option value="강원">강원특별자치도</option>
+                <option value="충북">충청북도</option>
+                <option value="충남">충청남도</option>
+                <option value="전북">전북특별자치도</option>
+                <option value="전남">전라남도</option>
+                <option value="경북">경상북도</option>
+                <option value="경남">경상남도</option>
+                <option value="제주">제주특별자치도</option>
+            </select>
+            <p class="text-xs text-gray-500 mt-2">💡 지역을 선택하면 해당 지역의 지원사업만 검색됩니다.</p>
+        </div>
+
+        <!-- Proposal Input -->
+        <div class="bg-white rounded-xl shadow-md p-6 mb-6">
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+                📝 사업계획서 요약
+            </label>
+            <textarea id="proposalText" rows="6"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      placeholder="사업 아이디어를 입력하세요..."></textarea>
+            
+            <!-- Sample Buttons with Region -->
+            <div class="mt-4">
+                <p class="text-sm text-gray-600 mb-2">📋 샘플 (지역 포함):</p>
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="loadSample('ai_seoul')" 
+                            class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm hover:bg-purple-200">
+                        AI 스타트업 (서울)
+                    </button>
+                    <button onclick="loadSample('green_gyeonggi')" 
+                            class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200">
+                        친환경 제조 (경기)
+                    </button>
+                    <button onclick="loadSample('tourism_busan')" 
+                            class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm hover:bg-blue-200">
+                        관광 플랫폼 (부산)
+                    </button>
+                    <button onclick="loadSample('farm_jeonnam')" 
+                            class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm hover:bg-yellow-200">
+                        스마트팜 (전남)
+                    </button>
+                    <button onclick="loadSample('marine_jeju')" 
+                            class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm hover:bg-cyan-200">
+                        해양바이오 (제주)
+                    </button>
                 </div>
             </div>
-            
-            <!-- 분석 버튼 -->
-            <button id="analyzeBtn" class="analyze-btn" disabled onclick="startAnalysis()">
-                🚀 N2B 분석 및 정책 매칭 시작
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex gap-4 mb-8">
+            <button onclick="analyzeN2B()" 
+                    class="flex-1 gradient-bg text-white py-4 rounded-xl font-bold hover:opacity-90 transition shadow-lg">
+                1️⃣ N2B 분석
             </button>
-            
-            <!-- 로딩 -->
-            <div id="loading" class="loading">
-                <div class="spinner"></div>
-                <p>AI가 사업계획서를 분석하고 있습니다...</p>
-            </div>
-            
-            <!-- 결과 -->
-            <div id="results" class="results">
-                <h3 style="color: #667eea; margin-bottom: 20px;">📊 분석 결과</h3>
-                
-                <div class="result-card">
-                    <h4>N (NOT) - 현재의 문제점</h4>
-                    <div id="resultN" class="result-text"></div>
+            <button onclick="matchPrograms()" id="matchBtn" disabled
+                    class="flex-1 bg-gray-400 text-white py-4 rounded-xl font-bold transition shadow-lg disabled:opacity-50">
+                2️⃣ 지원사업 매칭
+            </button>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="loading" class="hidden text-center py-8">
+            <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-purple-500 border-t-transparent"></div>
+            <p class="mt-4 text-gray-600">분석 중...</p>
+        </div>
+
+        <!-- N2B Analysis Result -->
+        <div id="n2bResult" class="hidden bg-white rounded-xl shadow-md p-6 mb-6">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">📊 N2B 분석 결과</h2>
+            <div class="space-y-4">
+                <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                    <h3 class="font-bold text-red-700">N (Not) - 문제점</h3>
+                    <p id="resultN" class="text-gray-700 mt-1"></p>
                 </div>
-                
-                <div class="result-card">
-                    <h4>B (BUT) - 제안 솔루션</h4>
-                    <div id="resultB" class="result-text"></div>
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                    <h3 class="font-bold text-blue-700">B (But) - 솔루션</h3>
+                    <p id="resultB" class="text-gray-700 mt-1"></p>
                 </div>
-                
-                <div class="result-card">
-                    <h4>C (BECAUSE) - 근거 및 기대효과</h4>
-                    <div id="resultC" class="result-text"></div>
+                <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                    <h3 class="font-bold text-green-700">C (Because) - 근거</h3>
+                    <p id="resultC" class="text-gray-700 mt-1"></p>
                 </div>
-                
-                <h3 style="color: #667eea; margin: 30px 0 20px;">🎯 추천 정부지원사업 Top 3</h3>
-                <div id="programResults"></div>
+                <div class="bg-purple-50 p-4 rounded">
+                    <h3 class="font-bold text-purple-700">🏷️ 키워드</h3>
+                    <div id="resultKeywords" class="flex flex-wrap gap-2 mt-2"></div>
+                </div>
             </div>
         </div>
-    </div>
+
+        <!-- Matching Results -->
+        <div id="matchResult" class="hidden">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-bold text-gray-800">🎯 매칭된 지원사업</h2>
+                <span id="regionBadge" class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm"></span>
+            </div>
+            <div id="programList" class="space-y-4"></div>
+        </div>
+    </main>
 
     <script>
-        let backendUrl = null;
-        let apiKey = null;
-        let inputMode = 'sample';
-        let selectedSample = null;
-        let uploadedFile = null;
+        let n2bAnalysis = null;
+        // ⚠️ 아래 URL을 실제 Railway 백엔드 주소로 변경하세요!
+        const API_BASE = 'https://n2b-backend-production.up.railway.app';
 
-        // 샘플 데이터
-        const sampleProposals = {
-            1: `사업명: AI 기반 실시간 건설현장 안전관리 시스템
-
-1. 현재 문제점 (N - NOT)
-국내 건설현장의 사망사고율은 OECD 평균의 2.5배에 달하며, 연간 400명 이상의 사망자가 발생하고 있습니다. 현재의 안전관리는 주로 작업자의 경험과 주관적 판단에 의존하고 있으며, 위험 상황의 실시간 감지가 불가능하고 사후 대응 중심이며 안전관리 인력이 부족합니다.
-
-2. 제안 솔루션 (B - BUT)
-AI 컴퓨터 비전과 IoT 센서를 결합한 실시간 안전관리 시스템으로, CCTV 실시간 분석으로 위험 자동 감지, IoT 센서로 작업자 위치 추적 및 유해가스 감지, 실시간 경보 시스템, 빅데이터 기반 예측적 안전관리를 제공합니다.
-
-3. 근거 및 기대효과 (C - BECAUSE)
-자체 AI 모델은 건설현장 위험 상황 인식률 94% 달성했으며, 서울대 건설환경공학부와 3년간 50개 현장 데이터 확보했습니다. 특허 2건 출원 완료, 파일럿 테스트에서 사고율 65% 감소 확인, 연간 2,000억원 안전사고 비용 절감 가능합니다.
-
-총 소요 예산: 15억원`,
-
-            2: `사업명: 스마트팜 친환경 병해충 예측 및 방제 시스템
-
-1. 현재 문제점 (N - NOT)
-국내 농가의 농약 사용량은 ha당 12.1kg으로 OECD 국가 중 1위이며, 과다한 예방적 농약 살포, 경험 의존적 판단으로 초기 발견 어려움, 부적절한 방제 시기로 효과 저하, 농약비가 생산비의 15-20% 차지합니다.
-
-2. 제안 솔루션 (B - BUT)
-AI 영상 진단(92% 정확도)과 IoT 센서 데이터로 7일 전 병해충 발생 예측, 최적 방제 타이밍 자동 알림, 친환경 방제법 우선 추천, 스마트폰 앱으로 실시간 모니터링을 제공합니다.
-
-3. 근거 및 기대효과 (C - BECAUSE)
-농촌진흥청 공동연구로 3년간 딸기·토마토 주요 병해충 20종 학습 데이터 확보, 파일럿 농가 10곳에서 농약 사용량 60% 감소 확인, 생산량 15% 증가, 농가당 연간 1,500만원 비용 절감 가능합니다.
-
-총 소요 예산: 12억원`,
-
-            3: `사업명: AI 기반 폐플라스틱 자동 분류 및 고부가 재활용 시스템
-
-1. 현재 문제점 (N - NOT)
-국내 연간 폐플라스틱 1,000만톤 중 실제 재활용률은 27%에 불과하며, 수작업 분류의 정확도 60%, 복합재질 처리 불가, 불순물 혼입으로 저품질 재생원료 생산, 열악한 작업환경으로 인력난이 심각합니다.
-
-2. 제안 솔루션 (B - BUT)
-하이퍼스펙트럼 AI 비전으로 7종 플라스틱 99% 정확도 자동 인식, Delta 로봇이 분당 120개 처리(기존 육안 대비 10배), 레이저 라벨 제거 및 AI 기반 세척으로 물 사용량 50% 절감, 불순물 0.1% 이하로 Virgin급 품질 생산합니다.
-
-3. 근거 및 기대효과 (C - BECAUSE)
-인천 재활용센터 6개월 파일럿에서 분류 정확도 99.2%, 시간당 5톤 처리, 재생원료 순도 99.8% 달성했습니다. KAIST 기계공학과 협력, 고품질 재생 PET는 톤당 150만원(일반 50만원 대비 3배), 연 10,000톤 처리 시 150억원 매출, Virgin 대비 톤당 CO2 3톤 감소 효과가 있습니다.
-
-총 소요 예산: 20억원`,
-
-            4: `사업명: AI 심전도 분석 기반 돌연사 예방 웨어러블 디바이스
-
-1. 현재 문제점 (N - NOT)
-국내 연간 심장 돌연사 3만명, 이중 70%는 전조증상 없이 발생하며, 기존 웨어러블은 단순 심박수 측정만 가능, 의료기관 심전도 검사는 짧은 측정 시간(10초)으로 간헐적 부정맥 포착 불가, 고령층·만성질환자 일상 모니터링 미흡합니다.
-
-2. 제안 솔루션 (B - BUT)
-패치형 센서로 14일 연속 심전도 측정, AI 알고리즘이 17종 부정맥 97% 정확도로 실시간 감지, 위험 시 환자·보호자·의료진에 즉시 알림, 클라우드 기반 장기 데이터 분석으로 돌연사 위험 7일 전 예측합니다.
-
-3. 근거 및 기대효과 (C - BECAUSE)
-서울대병원 순환기내과와 2년간 5,000명 심전도 데이터 확보, 의료기기 2등급 인허가 진행 중, 파일럿 병원 3곳에서 부정맥 조기 발견율 85% 향상 확인, 돌연사 30% 감소 목표, 연 3,000억원 의료비 절감 가능합니다.
-
-총 소요 예산: 18억원`,
-
-            5: `사업명: 중소 제조기업 맞춤형 저비용 스마트팩토리 솔루션
-
-1. 현재 문제점 (N - NOT)
-중소 제조기업의 스마트팩토리 도입률은 15%에 불과하며, 평균 구축비용 3억원으로 부담, 복잡한 시스템으로 운영 인력 부족, 레거시 설비와 호환성 문제, ROI 불확실성으로 투자 주저합니다.
-
-2. 제안 솔루션 (B - BUT)
-노코드 기반 조립형 모듈로 비전문가도 1주일 내 구축, 월 30만원 구독형 모델로 초기 투자 부담 제로, 기존 설비 80% 활용 가능한 IoT 센서 키트, 실시간 생산 모니터링 및 AI 기반 불량 예측을 제공합니다.
-
-3. 근거 및 기대효과 (C - BECAUSE)
-경기도 중소기업 20곳 파일럿에서 평균 구축비 90% 절감(3,000만원), 생산성 25% 향상, 불량률 40% 감소, 투자 회수 기간 1.5년 확인했습니다. 산업부 스마트제조혁신추진단 협력, 5년간 중소기업 1,000곳 보급 목표입니다.
-
-총 소요 예산: 15억원`
+        const samples = {
+            ai_seoul: {
+                region: '서울',
+                text: `서울 소재 AI 스타트업으로, 중소기업의 디지털 전환을 위한 AI 기반 업무 자동화 솔루션을 개발합니다. 
+기존 수작업 프로세스의 50% 이상 자동화를 목표로 하며, 클라우드 기반으로 초기 도입 비용을 최소화합니다.
+서울디지털재단 및 서울산업진흥원 협력을 통해 서울 지역 중소기업 1,000개사 도입을 목표로 합니다.`
+            },
+            green_gyeonggi: {
+                region: '경기',
+                text: `경기도 화성 소재 제조기업으로, 탄소중립 실현을 위한 친환경 포장재 생산 시스템을 구축합니다.
+기존 플라스틱 포장재를 100% 생분해성 소재로 대체하여 환경 오염을 저감하고,
+경기도 그린뉴딜 정책과 연계하여 도내 식품기업에 친환경 포장 솔루션을 공급합니다.`
+            },
+            tourism_busan: {
+                region: '부산',
+                text: `부산 해운대구 기반의 관광 스타트업으로, AI 기반 맞춤형 부산 관광 플랫폼을 개발합니다.
+외국인 관광객을 위한 다국어 AI 가이드 서비스와 지역 소상공인 연계 예약 시스템을 통합하여,
+부산시 관광산업 활성화에 기여합니다. 2025년 APEC 정상회의 연계 서비스 출시 목표.`
+            },
+            farm_jeonnam: {
+                region: '전남',
+                text: `전라남도 나주 소재 농업회사법인으로, IoT 기반 스마트팜 통합관리 시스템을 구축합니다.
+기존 노지 재배의 불확실성을 센서 데이터 기반 정밀농업으로 전환하여 생산성 30% 향상을 목표로 합니다.
+전남 농업기술원과 협력하여 도내 농가 500곳 보급을 추진합니다.`
+            },
+            marine_jeju: {
+                region: '제주',
+                text: `제주특별자치도 기반의 해양바이오 벤처로, 해조류에서 고부가가치 기능성 소재를 추출합니다.
+기존 해조류 가공의 저수익 구조를 바이오 기술로 혁신하여 화장품/의약품 원료 시장에 진출합니다.
+제주테크노파크와 협력하여 제주 해양자원의 부가가치를 극대화합니다.`
+            }
         };
 
-        // 설정 저장
-        function saveConfig() {
-            const urlInput = document.getElementById('backendUrl').value.trim();
-            const keyInput = document.getElementById('apiKeyInput').value.trim();
-            const statusEl = document.getElementById('configStatus');
-            
-            if (!urlInput) {
-                statusEl.innerHTML = '<span style="color: red;">❌ 백엔드 URL을 입력해주세요!</span>';
-                statusEl.style.background = '#ffe0e0';
+        function loadSample(key) {
+            const sample = samples[key];
+            document.getElementById('proposalText').value = sample.text;
+            document.getElementById('regionSelect').value = sample.region;
+        }
+
+        async function analyzeN2B() {
+            const apiKey = document.getElementById('apiKey').value;
+            const proposalText = document.getElementById('proposalText').value;
+
+            if (!apiKey || !proposalText) {
+                alert('API Key와 사업계획서를 입력해주세요.');
                 return;
             }
-            
-            if (!keyInput) {
-                statusEl.innerHTML = '<span style="color: red;">❌ API 키를 입력해주세요!</span>';
-                statusEl.style.background = '#ffe0e0';
-                return;
-            }
-            
-            if (!keyInput.startsWith('sk-ant-')) {
-                statusEl.innerHTML = '<span style="color: red;">❌ API 키는 "sk-ant-"로 시작해야 합니다!</span>';
-                statusEl.style.background = '#ffe0e0';
-                return;
-            }
-            
-            backendUrl = urlInput;
-            apiKey = keyInput;
-            
-            localStorage.setItem('n2b_backend_url', urlInput);
-            localStorage.setItem('n2b_api_key', keyInput);
-            
-            statusEl.innerHTML = '<span style="color: green;">✅ 설정이 저장되었습니다!</span>';
-            statusEl.style.background = '#d4edda';
-            
-            checkAnalyzeButton();
-        }
 
-        // 페이지 로드 시 설정 불러오기
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedUrl = localStorage.getItem('n2b_backend_url');
-            const savedKey = localStorage.getItem('n2b_api_key');
-            
-            if (savedUrl) {
-                document.getElementById('backendUrl').value = savedUrl;
-                backendUrl = savedUrl;
-            }
-            
-            if (savedKey) {
-                document.getElementById('apiKeyInput').value = savedKey;
-                apiKey = savedKey;
-            }
-            
-            if (savedUrl && savedKey) {
-                const statusEl = document.getElementById('configStatus');
-                statusEl.innerHTML = '<span style="color: green;">✅ 이전 설정을 불러왔습니다</span>';
-                statusEl.style.background = '#d4edda';
-                checkAnalyzeButton();
-            }
-        });
+            showLoading(true);
 
-        // 탭 전환
-        function switchTab(tabName) {
-            inputMode = tabName;
-            
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
-            
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            document.getElementById(`${tabName}-tab`).classList.add('active');
-            
-            if (tabName !== 'sample') {
-                selectedSample = null;
-                document.querySelectorAll('.sample-card').forEach(card => {
-                    card.classList.remove('selected');
-                });
-            }
-            if (tabName !== 'upload') {
-                uploadedFile = null;
-                document.getElementById('fileName').textContent = '';
-            }
-            
-            checkAnalyzeButton();
-        }
-
-        // 샘플 선택
-        function selectSample(sampleId) {
-            document.querySelectorAll('.sample-card').forEach(card => {
-                card.classList.remove('selected');
-            });
-            
-            document.querySelector(`[data-sample="${sampleId}"]`).classList.add('selected');
-            selectedSample = sampleId;
-            
-            checkAnalyzeButton();
-        }
-
-        // 파일 업로드
-        async function handleFileUpload(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            
-            uploadedFile = await readFile(file);
-            document.getElementById('fileName').textContent = `📄 ${file.name}`;
-            
-            checkAnalyzeButton();
-        }
-
-        function readFile(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = (e) => resolve(e.target.result);
-                reader.onerror = reject;
-                reader.readAsText(file);
-            });
-        }
-
-        // 버튼 활성화 체크
-        function checkAnalyzeButton() {
-            const analyzeBtn = document.getElementById('analyzeBtn');
-            let canAnalyze = false;
-            
-            if (backendUrl && apiKey && apiKey.startsWith('sk-ant-')) {
-                if (inputMode === 'sample' && selectedSample) {
-                    canAnalyze = true;
-                } else if (inputMode === 'upload' && uploadedFile) {
-                    canAnalyze = true;
-                } else if (inputMode === 'form') {
-                    const projectName = document.getElementById('projectName').value.trim();
-                    const problemN = document.getElementById('problemN').value.trim();
-                    const solutionB = document.getElementById('solutionB').value.trim();
-                    const evidenceC = document.getElementById('evidenceC').value.trim();
-                    
-                    if (projectName && problemN && solutionB && evidenceC) {
-                        canAnalyze = true;
-                    }
-                }
-            }
-            
-            analyzeBtn.disabled = !canAnalyze;
-        }
-
-        // 폼 입력 감지
-        ['projectName', 'problemN', 'solutionB', 'evidenceC'].forEach(id => {
-            document.getElementById(id).addEventListener('input', checkAnalyzeButton);
-        });
-
-        // 분석 시작
-        async function startAnalysis() {
-            // 입력 데이터 수집
-            let proposalText = '';
-            
-            if (inputMode === 'sample') {
-                proposalText = sampleProposals[selectedSample];
-            } else if (inputMode === 'upload') {
-                proposalText = uploadedFile;
-            } else if (inputMode === 'form') {
-                const projectName = document.getElementById('projectName').value.trim();
-                const problemN = document.getElementById('problemN').value.trim();
-                const solutionB = document.getElementById('solutionB').value.trim();
-                const evidenceC = document.getElementById('evidenceC').value.trim();
-                
-                proposalText = `사업명: ${projectName}\n\n1. 현재 문제점 (N - NOT)\n${problemN}\n\n2. 제안 솔루션 (B - BUT)\n${solutionB}\n\n3. 근거 및 기대효과 (C - BECAUSE)\n${evidenceC}`;
-            }
-            
-            // UI 업데이트
-            document.getElementById('results').classList.remove('active');
-            document.getElementById('loading').classList.add('active');
-            
             try {
-                // 1단계: N2B 분석
-                const n2bResult = await callBackend('analyze', {
-                    apiKey: apiKey,
-                    proposalText: proposalText
+                const response = await fetch(`${API_BASE}/analyze`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ apiKey, proposalText })
                 });
-                
-                if (n2bResult.error) {
-                    throw new Error(n2bResult.error);
-                }
-                
-                // 결과 표시
-                document.getElementById('resultN').textContent = n2bResult.N;
-                document.getElementById('resultB').textContent = n2bResult.B;
-                document.getElementById('resultC').textContent = n2bResult.C;
-                
-                // 2단계: 정책 매칭
-                const matchResult = await callBackend('match', {
-                    apiKey: apiKey,
-                    n2bAnalysis: n2bResult
-                });
-                
-                if (matchResult.error) {
-                    throw new Error(matchResult.error);
-                }
-                
-                // 정책 결과 표시
-                displayProgramMatches(matchResult.matches);
-                
-                // 결과 표시
-                document.getElementById('loading').classList.remove('active');
-                document.getElementById('results').classList.add('active');
-                document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
-                
+
+                if (!response.ok) throw new Error('분석 실패');
+
+                n2bAnalysis = await response.json();
+
+                document.getElementById('resultN').textContent = n2bAnalysis.N;
+                document.getElementById('resultB').textContent = n2bAnalysis.B;
+                document.getElementById('resultC').textContent = n2bAnalysis.C;
+
+                const keywordsDiv = document.getElementById('resultKeywords');
+                keywordsDiv.innerHTML = n2bAnalysis.keywords.map(k => 
+                    `<span class="px-3 py-1 bg-purple-200 text-purple-800 rounded-full text-sm">${k}</span>`
+                ).join('');
+
+                document.getElementById('n2bResult').classList.remove('hidden');
+                document.getElementById('matchBtn').disabled = false;
+                document.getElementById('matchBtn').classList.remove('bg-gray-400');
+                document.getElementById('matchBtn').classList.add('bg-green-500', 'hover:bg-green-600');
+
             } catch (error) {
-                document.getElementById('loading').classList.remove('active');
-                alert('❌ 오류 발생\n' + error.message + '\n\n설정을 확인해주세요.');
+                alert('오류: ' + error.message);
+            } finally {
+                showLoading(false);
             }
         }
 
-        // 백엔드 호출
-               async function callBackend(action, data) {
-            const url = backendUrl + '/' + action;
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-            
-            if (!response.ok) {
-                throw new Error('백엔드 호출 실패: ' + response.status);
+        async function matchPrograms() {
+            const apiKey = document.getElementById('apiKey').value;
+            const region = document.getElementById('regionSelect').value;
+
+            if (!n2bAnalysis) {
+                alert('먼저 N2B 분석을 수행해주세요.');
+                return;
             }
-            
-            return await response.json();
+
+            showLoading(true);
+
+            try {
+                const response = await fetch(`${API_BASE}/match`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        apiKey, 
+                        n2bAnalysis,
+                        region
+                    })
+                });
+
+                if (!response.ok) throw new Error('매칭 실패');
+
+                const result = await response.json();
+
+                const regionBadge = document.getElementById('regionBadge');
+                regionBadge.textContent = `📍 ${region === '전체' ? '전국' : region}`;
+
+                const listDiv = document.getElementById('programList');
+                
+                if (result.programs && result.programs.length > 0) {
+                    listDiv.innerHTML = result.programs.map((p, i) => `
+                        <div class="bg-white rounded-xl shadow-md p-6 card-hover transition">
+                            <div class="flex justify-between items-start">
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs">${p.region || region}</span>
+                                        <span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs">매칭 ${p.matchScore || 85}%</span>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-gray-800">${p.name}</h3>
+                                    <p class="text-gray-600 text-sm mt-1">🏢 ${p.organization}</p>
+                                    <p class="text-gray-600 text-sm">📅 마감: ${p.deadline}</p>
+                                    <p class="text-gray-600 text-sm">💰 ${p.amount}</p>
+                                    <p class="text-purple-600 text-sm mt-2">💡 ${p.matchReason}</p>
+                                </div>
+                                <a href="${p.url}" target="_blank" 
+                                   class="ml-4 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition text-sm whitespace-nowrap">
+                                    상세보기 →
+                                </a>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    listDiv.innerHTML = `
+                        <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6 text-center">
+                            <p class="text-yellow-700">😅 현재 ${region === '전체' ? '전국에서' : region + '에서'} 모집중인 매칭 사업이 없습니다.</p>
+                            <p class="text-gray-600 text-sm mt-2">다른 지역을 선택하거나 나중에 다시 시도해주세요.</p>
+                        </div>
+                    `;
+                }
+
+                document.getElementById('matchResult').classList.remove('hidden');
+
+            } catch (error) {
+                alert('오류: ' + error.message);
+            } finally {
+                showLoading(false);
+            }
         }
 
-
-        // 정책 매칭 결과 표시
-        function displayProgramMatches(matches) {
-            const container = document.getElementById('programResults');
-            container.innerHTML = '';
-            
-            matches.forEach((match, index) => {
-                const program = match.program;
-                const card = document.createElement('div');
-                card.className = 'program-card';
-                card.innerHTML = `
-                    <div class="program-header">
-                        <div class="program-title">${index + 1}위: ${program.name}</div>
-                        <div class="match-score">매칭도 ${match.score}/10</div>
-                    </div>
-                    <div class="program-meta">
-                        <span class="meta-tag">🏢 ${program.agency}</span>
-                        <span class="meta-tag">🎯 ${program.target}</span>
-                        <span class="meta-tag">📅 ${program.period}</span>
-                        <span class="meta-tag">💰 ${program.support_amount}</span>
-                    </div>
-                    <div class="program-reason">
-                        <strong>추천 이유:</strong><br>
-                        ${match.reason}
-                    </div>
-                `;
-                container.appendChild(card);
-            });
+        function showLoading(show) {
+            document.getElementById('loading').classList.toggle('hidden', !show);
         }
     </script>
 </body>
