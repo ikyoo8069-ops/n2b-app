@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>슬기로운 기업경영 - 제안서 자동 생성 데모</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Malgun Gothic', -apple-system, sans-serif;
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b3a57 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            padding: 30px 0;
+            color: white;
+        }
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        header h1 span { color: #ff6b35; }
+        header p { color: #94a3b8; font-size: 1.1em; }
+        
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        .section h3 {
+            color: #0d1b2a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #ff6b35;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            resize: vertical;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #ff6b35;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b35 0%, #e55a2b 100%);
+            color: white;
+        }
+        .btn-secondary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .n2b-result {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .n2b-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: flex-start;
+        }
+        .n2b-badge {
+            width: 40px;
+            height: 40px;
+            background: #ff6b35;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        .n2b-content {
+            flex: 1;
+        }
+        .n2b-content strong {
+            color: #ff6b35;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .policy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .policy-card {
+            background: linear-gradient(135deg, #1b3a57 0%, #0d1b2a 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .policy-card:hover {
+            transform: translateY(-3px);
+            border-color: #ff6b35;
+        }
+        .policy-card.selected {
+            border-color: #ff6b35;
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+        }
+        .policy-card h4 { color: #ff6b35; margin-bottom: 10px; }
+        .policy-card p { color: #94a3b8; font-size: 13px; line-height: 1.5; }
+        
+        .doc-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        #generatedContent {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 20px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        #generatedContent h3 { color: #1b3a57; border-bottom: 2px solid #ff6b35; padding-bottom: 8px; margin: 20px 0 15px 0; }
+        #generatedContent h4 { color: #374151; margin: 15px 0 10px 0; }
+        #generatedContent p, #generatedContent li { line-height: 1.8; color: #4b5563; }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e2e8f0;
+            border-top-color: #ff6b35;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        .demo-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .remaining-info {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #92400e;
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        .step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .step.active {
+            background: #ff6b35;
+            color: white;
+        }
+        .step.completed {
+            background: #10b981;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>슬기로운 <span>기업경영</span></h1>
+            <p>N2B 기반 AI 경영 파트너 - 제안서 자동 생성 데모</p>
+            <div class="demo-badge">🎯 데모 모드 - API 키 불필요</div>
+        </header>
+        
+        <div class="step-indicator">
+            <div class="step active" id="step1">1</div>
+            <div class="step" id="step2">2</div>
+            <div class="step" id="step3">3</div>
+            <div class="step" id="step4">4</div>
+        </div>
+        
+        <!-- 남은 요청 횟수 표시 -->
+        <div class="remaining-info" id="remainingInfo">
+            ⏳ 남은 데모 요청: <strong id="remainingCount">확인 중...</strong>회 (일일 한도)
+        </div>
+        
+        <!-- Step 1: 기업 정보 입력 -->
+        <div class="section" id="inputSection">
+            <h3>📝 Step 1: 기업 정보 입력</h3>
+            <div style="margin-bottom: 15px;">
+                <strong>샘플 선택:</strong>
+                <button class="btn" style="background: #6b7280; color: white; padding: 8px 15px; margin: 5px;" onclick="loadSample(1)">샘플1: 제조업</button>
+                <button class="btn" style="background: #6b7280; color: white; padding: 8px 15px; margin: 5px;" onclick="loadSample(2)">샘플2: IT스타트업</button>
+                <button class="btn" style="background: #6b7280; color: white; padding: 8px 15px; margin: 5px;" onclick="loadSample(3)">샘플3: 소상공인</button>
+            </div>
+            <textarea id="companyInfo" placeholder="기업의 현재 상황과 고민을 자유롭게 작성해주세요."></textarea>
+            <button class="btn btn-primary" onclick="runN2bAnalysis()" style="margin-top: 15px;">
+                🔍 N2B 분석 시작
+            </button>
+        </div>
+        
+        <!-- Step 2: N2B 분석 결과 -->
+        <div class="section" id="n2bSection" style="display: none;">
+            <h3>🧠 Step 2: N2B 분석 결과</h3>
+            <div id="n2bLoading" class="loading">
+                <div class="spinner"></div>
+                <p>AI가 분석 중입니다...</p>
+            </div>
+            <div id="n2bResult" class="n2b-result" style="display: none;"></div>
+            <button class="btn btn-primary" onclick="showPolicies()" id="nextToPolicy" style="display: none; margin-top: 15px;">
+                다음: 지원사업 추천 보기 →
+            </button>
+        </div>
+        
+        <!-- Step 3: 정책 선택 -->
+        <div class="section" id="policySection" style="display: none;">
+            <h3>🎯 Step 3: 지원사업 선택</h3>
+            <p style="color: #666; margin-bottom: 15px;">아래 추천 사업 중 하나를 선택하세요.</p>
+            <div class="policy-grid" id="policyGrid"></div>
+        </div>
+        
+        <!-- Step 4: 문서 생성 -->
+        <div class="section" id="docSection" style="display: none;">
+            <h3>📄 Step 4: 문서 자동 생성</h3>
+            <div style="background: #e8f4fd; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <strong>선택한 사업:</strong> <span id="selectedProgramName">-</span>
+            </div>
+            
+            <div class="doc-buttons">
+                <button class="btn btn-secondary" onclick="generateProposal()">
+                    📄 제안서 초안 생성
+                </button>
+                <button class="btn btn-success" onclick="generatePptOutline()">
+                    📊 발표자료 구성안 생성
+                </button>
+            </div>
+            
+            <div id="docLoading" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>AI가 문서를 작성 중입니다... (약 30초)</p>
+            </div>
+            
+            <div id="generatedContent" style="display: none;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h4 id="contentTitle">생성된 문서</h4>
+                    <button class="btn" style="background: #6b7280; color: white; padding: 8px 16px;" onclick="copyContent()">
+                        📋 복사
+                    </button>
+                </div>
+                <div id="contentArea"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // ============================================
+        // 설정
+        // ============================================
+        const BACKEND_URL = 'https://n2b-backend.onrender.com';
+        
+        let currentN2bResult = null;
+        let selectedProgram = null;
+        let companyInfo = '';
+        
+        // ============================================
+        // 초기화 - 남은 요청 횟수 확인
+        // ============================================
+        async function checkDemoStatus() {
+            try {
+                const response = await fetch(`${BACKEND_URL}/demo/status`);
+                const data = await response.json();
+                document.getElementById('remainingCount').textContent = data.remaining_requests;
+                
+                if (!data.available) {
+                    document.getElementById('remainingInfo').innerHTML = 
+                        '⚠️ 데모 모드가 현재 비활성화되어 있습니다.';
+                    document.getElementById('remainingInfo').style.background = '#fee2e2';
+                    document.getElementById('remainingInfo').style.borderColor = '#ef4444';
+                }
+            } catch (error) {
+                document.getElementById('remainingCount').textContent = '확인 불가';
+            }
+        }
+        
+        // 페이지 로드 시 상태 확인
+        checkDemoStatus();
+        
+        // ============================================
+        // 샘플 데이터
+        // ============================================
+        const samples = {
+            1: `[제조업 - 자동차 부품]
+- 업종: 제조업 (자동차 부품)
+- 규모: 5년차, 직원 15명, 연매출 20억
+- 지역: 경기도 화성시
+- 현재 고민: 인력 채용이 어렵고 매출이 정체되어 있음. 대기업 납품 단가 인하 압박.
+- 보유 역량: ISO 인증, 품질인증 보유, 자체 금형 기술
+- 목표: 스마트공장 도입으로 생산성 향상, 신규 거래처 확보`,
+
+            2: `[IT 스타트업 - AI 솔루션]
+- 업종: IT/소프트웨어 (AI 기반 고객분석 솔루션)
+- 규모: 창업 2년차, 직원 8명, 연매출 5억
+- 지역: 서울 강남구
+- 현재 고민: 기술개발 인력 부족, 마케팅 비용 부담, 시리즈A 투자 유치 필요
+- 보유 역량: AI/ML 핵심 기술, 특허 2건, 대기업 PoC 경험
+- 목표: 해외 진출, 투자 유치, R&D 역량 강화`,
+
+            3: `[소상공인 - 카페/베이커리]
+- 업종: 음식점업 (카페 겸 베이커리)
+- 규모: 창업 3년차, 직원 3명, 연매출 2억
+- 지역: 부산 해운대구
+- 현재 고민: 프랜차이즈 경쟁 심화, 원자재 가격 상승, 온라인 판매 확대 필요
+- 보유 역량: 수제 베이커리 레시피, 단골 고객층, SNS 마케팅 경험
+- 목표: 온라인 판매 시작, 배달 서비스 확대, 2호점 오픈`
+        };
+        
+        function loadSample(num) {
+            document.getElementById('companyInfo').value = samples[num];
+        }
+        
+        // ============================================
+        // 샘플 정책 데이터
+        // ============================================
+        const samplePolicies = [
+            {
+                name: "스마트공장 구축 지원사업",
+                description: "중소기업의 스마트공장 구축을 위한 시스템 도입 비용 지원. 최대 3억원, 자부담 30%",
+                budget: "최대 3억원"
+            },
+            {
+                name: "중소기업 R&D 역량강화 사업",
+                description: "기술개발 역량 강화를 위한 연구인력 인건비 및 연구비 지원",
+                budget: "최대 2억원"
+            },
+            {
+                name: "고용촉진장려금",
+                description: "청년, 장년 신규 채용 시 인건비 일부 지원. 1인당 연 960만원",
+                budget: "1인당 960만원"
+            },
+            {
+                name: "수출바우처 사업",
+                description: "해외 마케팅, 인증, 통번역 등 수출 관련 서비스 이용권 지원",
+                budget: "최대 1억원"
+            }
+        ];
+        
+        // ============================================
+        // 단계 업데이트
+        // ============================================
+        function updateSteps(activeStep) {
+            for (let i = 1; i <= 4; i++) {
+                const step = document.getElementById(`step${i}`);
+                step.classList.remove('active', 'completed');
+                if (i < activeStep) step.classList.add('completed');
+                if (i === activeStep) step.classList.add('active');
+            }
+        }
+        
+        // ============================================
+        // N2B 분석 (데모 백엔드 사용)
+        // ============================================
+        async function runN2bAnalysis() {
+            companyInfo = document.getElementById('companyInfo').value;
+            if (!companyInfo.trim()) {
+                alert('기업 정보를 입력해주세요.');
+                return;
+            }
+            
+            document.getElementById('n2bSection').style.display = 'block';
+            document.getElementById('n2bLoading').style.display = 'block';
+            document.getElementById('n2bResult').style.display = 'none';
+            updateSteps(2);
+            
+            try {
+                const response = await fetch(`${BACKEND_URL}/demo/analyze`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        proposalText: companyInfo
+                    })
+                });
+                
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.detail || '분석 실패');
+                }
+                
+                const data = await response.json();
+                
+                // 남은 요청 횟수 업데이트
+                if (data.remaining_requests !== undefined) {
+                    document.getElementById('remainingCount').textContent = data.remaining_requests;
+                }
+                
+                // JSON 파싱
+                const text = data.result;
+                const jsonMatch = text.match(/\{[\s\S]*\}/);
+                if (jsonMatch) {
+                    const parsed = JSON.parse(jsonMatch[0]);
+                    currentN2bResult = {
+                        not: parsed.not || parsed.n || '',
+                        but: parsed.but || parsed.b || '',
+                        because: parsed.because || parsed.c || ''
+                    };
+                    displayN2bResult(currentN2bResult);
+                }
+                
+            } catch (error) {
+                alert('분석 오류: ' + error.message);
+            } finally {
+                document.getElementById('n2bLoading').style.display = 'none';
+            }
+        }
+        
+        function displayN2bResult(result) {
+            document.getElementById('n2bResult').innerHTML = `
+                <div class="n2b-item">
+                    <div class="n2b-badge">N</div>
+                    <div class="n2b-content">
+                        <strong>NOT (문제점)</strong>
+                        <p>${result.not || '분석 결과 없음'}</p>
+                    </div>
+                </div>
+                <div class="n2b-item">
+                    <div class="n2b-badge">B</div>
+                    <div class="n2b-content">
+                        <strong>BUT (해결책)</strong>
+                        <p>${result.but || '분석 결과 없음'}</p>
+                    </div>
+                </div>
+                <div class="n2b-item">
+                    <div class="n2b-badge">B</div>
+                    <div class="n2b-content">
+                        <strong>BECAUSE (근거)</strong>
+                        <p>${result.because || '분석 결과 없음'}</p>
+                    </div>
+                </div>
+            `;
+            document.getElementById('n2bResult').style.display = 'block';
+            document.getElementById('nextToPolicy').style.display = 'inline-block';
+        }
+        
+        // ============================================
+        // 정책 표시 및 선택
+        // ============================================
+        function showPolicies() {
+            document.getElementById('policySection').style.display = 'block';
+            updateSteps(3);
+            
+            const grid = document.getElementById('policyGrid');
+            grid.innerHTML = samplePolicies.map((policy, idx) => `
+                <div class="policy-card" onclick="selectPolicy(${idx})" id="policy-${idx}">
+                    <h4>${policy.name}</h4>
+                    <p>${policy.description}</p>
+                    <p style="color: #ff6b35; margin-top: 10px; font-weight: bold;">💰 ${policy.budget}</p>
+                </div>
+            `).join('');
+            
+            document.getElementById('policySection').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function selectPolicy(idx) {
+            document.querySelectorAll('.policy-card').forEach(card => card.classList.remove('selected'));
+            document.getElementById(`policy-${idx}`).classList.add('selected');
+            selectedProgram = samplePolicies[idx];
+            
+            document.getElementById('selectedProgramName').textContent = selectedProgram.name;
+            document.getElementById('docSection').style.display = 'block';
+            document.getElementById('generatedContent').style.display = 'none';
+            updateSteps(4);
+            
+            document.getElementById('docSection').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // ============================================
+        // 제안서 생성 (데모 백엔드 사용)
+        // ============================================
+        async function generateProposal() {
+            if (!selectedProgram) return;
+            
+            document.getElementById('docLoading').style.display = 'block';
+            document.getElementById('generatedContent').style.display = 'none';
+            
+            try {
+                const response = await fetch(`${BACKEND_URL}/demo/proposal`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        companyInfo: companyInfo,
+                        n2bResult: currentN2bResult,
+                        selectedProgram: selectedProgram
+                    })
+                });
+                
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.detail || '생성 실패');
+                }
+                
+                const data = await response.json();
+                
+                // 남은 요청 횟수 업데이트
+                if (data.remaining_requests !== undefined) {
+                    document.getElementById('remainingCount').textContent = data.remaining_requests;
+                }
+                
+                document.getElementById('contentTitle').textContent = '📄 제안서 초안';
+                document.getElementById('contentArea').innerHTML = formatContent(data.result);
+                document.getElementById('generatedContent').style.display = 'block';
+                
+            } catch (error) {
+                alert('생성 오류: ' + error.message);
+            } finally {
+                document.getElementById('docLoading').style.display = 'none';
+            }
+        }
+        
+        // ============================================
+        // PPT 구성안 생성 (데모 백엔드 사용)
+        // ============================================
+        async function generatePptOutline() {
+            if (!selectedProgram) return;
+            
+            document.getElementById('docLoading').style.display = 'block';
+            document.getElementById('generatedContent').style.display = 'none';
+            
+            try {
+                const response = await fetch(`${BACKEND_URL}/demo/ppt`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        companyInfo: companyInfo,
+                        n2bResult: currentN2bResult,
+                        selectedProgram: selectedProgram
+                    })
+                });
+                
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.detail || '생성 실패');
+                }
+                
+                const data = await response.json();
+                
+                // 남은 요청 횟수 업데이트
+                if (data.remaining_requests !== undefined) {
+                    document.getElementById('remainingCount').textContent = data.remaining_requests;
+                }
+                
+                document.getElementById('contentTitle').textContent = '📊 발표자료 구성안';
+                document.getElementById('contentArea').innerHTML = formatContent(data.result);
+                document.getElementById('generatedContent').style.display = 'block';
+                
+            } catch (error) {
+                alert('생성 오류: ' + error.message);
+            } finally {
+                document.getElementById('docLoading').style.display = 'none';
+            }
+        }
+        
+        // ============================================
+        // 마크다운 포맷 변환
+        // ============================================
+        function formatContent(text) {
+            let result = text;
+            
+            // 마크다운 표 → HTML 표 변환
+            const tableRegex = /(\|.+\|\n)+/g;
+            result = result.replace(tableRegex, function(table) {
+                const rows = table.trim().split('\n');
+                let html = '<table style="width:100%; border-collapse:collapse; margin:15px 0;">';
+                
+                rows.forEach((row, idx) => {
+                    if (row.match(/^\|[\s\-:]+\|$/)) return;
+                    
+                    const cells = row.split('|').filter(c => c.trim() !== '');
+                    const tag = idx === 0 ? 'th' : 'td';
+                    const bgColor = idx === 0 ? 'background:#f3f4f6;' : '';
+                    
+                    html += '<tr>';
+                    cells.forEach(cell => {
+                        html += `<${tag} style="border:1px solid #e5e7eb; padding:10px; ${bgColor}">${cell.trim()}</${tag}>`;
+                    });
+                    html += '</tr>';
+                });
+                
+                html += '</table>';
+                return html;
+            });
+            
+            // 나머지 마크다운 변환
+            return result
+                .replace(/### (.*)/g, '<h3>$1</h3>')
+                .replace(/#### (.*)/g, '<h4>$1</h4>')
+                .replace(/## (.*)/g, '<h2 style="color:#1b3a57; border-bottom:2px solid #ff6b35; padding-bottom:5px; margin-top:20px;">$1</h2>')
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/- (.*)/g, '<li>$1</li>')
+                .replace(/\n/g, '<br>');
+        }
+        
+        // ============================================
+        // 복사 기능
+        // ============================================
+        function copyContent() {
+            const content = document.getElementById('contentArea').innerText;
+            navigator.clipboard.writeText(content).then(() => {
+                alert('클립보드에 복사되었습니다!');
+            });
+        }
+    </script>
+</body>
+</html>
